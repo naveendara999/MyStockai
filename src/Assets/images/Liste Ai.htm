@@ -1,45 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>Liste Ai</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 
-    <link rel="stylesheet" href="css/bootstrap-grid.min.css"> 
-    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/jquery.flipster.min.css" />
 
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
 
-
-  <link rel="stylesheet" href="css/jquery.fancybox.min.css" />
-
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css" />
   </head>
   <body>
-
     <header class="fixed-top">
       <div class="row">
         <div class="col-md-12">
           <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand logo" href="/"><img src="img/Logo.png" alt="" class="img-fluid"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand logo" href="/"
+              ><img src="img/Logo.svg" alt="" class="img-fluid"
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
               <!-- <span class="navbar-toggler-icon"></span> -->
               <i class="fa fa-bars"></i>
             </button>
 
-            <div class="maincollapse collapse navbar-collapse" id="navbarSupportedContent">
-              
+            <div
+              class="maincollapse collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
               <div class="loginarea my-2 my-lg-0">
                 <ul>
-                  <li><a class="createacc" href="https://app.liste.ai/signup">Create account</a></li>
-                  <li><a class="createacc ml-4" href="https://app.liste.ai/login">Login</a></li>
+                  <li>
+                    <a class="createacc" href="https://app.MyStock.ai/signup"
+                      >Create account</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="createacc ml-4"
+                      href="https://app.MyStock.ai/login"
+                      >Login</a
+                    >
+                  </li>
                 </ul>
               </div>
             </div>
@@ -48,12 +73,19 @@
       </div>
     </header>
 
-    <section class="bannerare m-0" style="background:#f4f4f4;">
-      <div class="row m-0" style="padding-top: 80px; min-height: 100vh;">
-        <div class="col-md-6 banner-col text-container d-flex align-items-center">
+    <section class="bannerare m-0" style="background: #f4f4f4">
+      <div class="row m-0" style="padding-top: 80px; min-height: 100vh">
+        <div
+          class="col-md-6 banner-col text-container d-flex align-items-center"
+        >
           <div class="bannerleftside text-center">
-            <h1 class="wow fadeInDown pt-4 pt-md-0">Buy in Uptrend. Ride it till it ends</h1>
-            <p>Our Artificial Intelligence finds the best entry for the stocks in the strong uptrend and alerts when the trend ends</p>
+            <h1 class="wow fadeInDown pt-4 pt-md-0">
+              Buy in Uptrend. Ride it till it ends
+            </h1>
+            <p>
+              Our Artificial Intelligence finds the best entry for the stocks in
+              the strong uptrend and alerts when the trend ends
+            </p>
             <!-- <div class="videotext">
               <ul>
                 <li class="wow fadeInLeft"><i class="fa fa-check-square-o" aria-hidden="true"></i> Get Stocks in confirmed Uptrend</li>
@@ -63,15 +95,23 @@
             </div> -->
             <div class="loginarea pt-4 wow fadeInLeft">
               <ul>
-                <li><a class="createacc m-0" href="https://app.liste.ai/signup">Create account with your email</a></li>
+                <li>
+                  <a class="createacc m-0" href="https://app.MyStock.ai/signup"
+                    >Create account with your email</a
+                  >
+                </li>
               </ul>
             </div>
           </div>
         </div>
         <div class="col-md-6 banner-col img-container p-0">
-            <div class="heroimage">
-              <img src="img/mainbanner.png" alt="" class="wow fadeInRight img-fluid">
-            </div>
+          <div class="heroimage">
+            <img
+              src="img/mainbanner.png"
+              alt=""
+              class="wow fadeInRight img-fluid"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -81,68 +121,119 @@
         <h2 class="wow fadeInLeft mb-3">Top picks from the past</h2>
       </div>
       <div id="carousel" class="pb-5 container">
-        <ul class="flip-items flipster--coverflow" id="flip-carousel-container">
-        </ul>
+        <ul
+          class="flip-items flipster--coverflow"
+          id="flip-carousel-container"
+        ></ul>
       </div>
     </section>
 
     <section class="my-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 d-flex align-items-center justify-content-center mt-5 mt-md-0 order-xs-2 order-2 order-md-0 px-md-3 px-0">
+          <div
+            class="
+              col-md-6
+              d-flex
+              align-items-center
+              justify-content-center
+              mt-5 mt-md-0
+              order-xs-2 order-2 order-md-0
+              px-md-3 px-0
+            "
+          >
             <div class="videoleft">
               <a data-fancybox="html5-video" href="img/whiteboard.mp4">
-                <img src="img/listeposter.png" class="img-fluid wow fadeInRight">
-                <img src="img/playicon.png" alt="" class="playicon img-fluid wow fadeInUp">
+                <img
+                  src="img/listeposter.png"
+                  class="img-fluid wow fadeInRight"
+                />
+                <img
+                  src="img/playicon.png"
+                  alt=""
+                  class="playicon img-fluid wow fadeInUp"
+                />
               </a>
-          </div>
+            </div>
           </div>
 
-          <div class="col-md-6 text-container text-left d-flex align-items-center">
+          <div
+            class="col-md-6 text-container text-left d-flex align-items-center"
+          >
             <div class="text-left">
               <h2 class="wow fadeInLeft mb-3">How do we help you?</h2>
               <div class="videotext">
                 <ul>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     View daily uptrend stocks
                     <span>
                       Top stocks in uptrend each day that you can buy
                     </span>
                   </li>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft  fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     Receive sell alerts
                     <span>
                       We track your stocks and alert you when to sell
                     </span>
                   </li>
-                  <li  class="wow fadeInDown"><i class="wow fadeInLeft  fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     Invest in popular Trading Ideas
                     <span>
-                      Pick stocks that matters most to you (EV, SPAC, Solar, ...)
+                      Pick stocks that matters most to you (EV, SPAC, Solar,
+                      ...)
                     </span>
                   </li>
-                  <li  class="wow fadeInDown"><i class="wow fadeInLeft  fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     Look up by industry groups
-                    <span>
-                      Grouped by industry performance
-                    </span>
+                    <span> Grouped by industry performance </span>
                   </li>
-                  <li  class="wow fadeInDown"><i class="wow fadeInLeft  fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     Match your investment style
                     <span>
-                      We learn your investment style and show you stocks that match your investing style
+                      We learn your investment style and show you stocks that
+                      match your investing style
                     </span>
                   </li>
-                  <li  class="wow fadeInDown"><i class="wow fadeInLeft  fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     Analyze with comprehensive view
                     <span>
-                      Dashboard view of each stock's Analyst rating, Social sentiment, Technicals and Fundamentals
+                      Dashboard view of each stock's Analyst rating, Social
+                      sentiment, Technicals and Fundamentals
                     </span>
                   </li>
-                  <li  class="wow fadeInDown"><i class="wow fadeInLeft  fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     Buy or sell decision at a glance
                     <span>
-                      Easy to understand analysis, so you can make a buy or sell decision in less than a minute
+                      Easy to understand analysis, so you can make a buy or sell
+                      decision in less than a minute
                     </span>
                   </li>
                 </ul>
@@ -156,105 +247,165 @@
     <section class="my-5 pt-4 pb-0 pb-md-4">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 text-container text-left d-flex align-items-center">
+          <div
+            class="col-md-6 text-container text-left d-flex align-items-center"
+          >
             <div class="text-left">
-              <h2 class="wow fadeInLeft mb-3">Everyone has their own style of INVESTING.</h2>
+              <h2 class="wow fadeInLeft mb-3">
+                Everyone has their own style of INVESTING.
+              </h2>
               <div class="videotext">
                 <ul>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     Sector-based
-                    <span>
-                      (Technology, Finance, Healthcare, ...)
-                    </span>
+                    <span> (Technology, Finance, Healthcare, ...) </span>
                   </li>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     Price-based
-                    <span>
-                      (Penny Stocks, Under $50, Growth, ....)
-                    </span>
+                    <span> (Penny Stocks, Under $50, Growth, ....) </span>
                   </li>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     Instrument based
                     <span>
                       (Stocks, Options, sector ETFs, Leveraged ETFs, .....)
                     </span>
                   </li>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     Risk level
                     <span>
                       (Volatility, Earnings play, Dividend play, ......)
                     </span>
                   </li>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     IPOs
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="col-md-6 d-flex align-items-center justify-content-center mt-5 mt-md-0 px-md-3 px-0">
+          <div
+            class="
+              col-md-6
+              d-flex
+              align-items-center
+              justify-content-center
+              mt-5 mt-md-0
+              px-md-3 px-0
+            "
+          >
             <div class="videoleft aiimagevideo">
-              <img src="img/aiimage.jpeg" alt="" class="wow fadeInLeft img-fluid">
+              <img
+                src="img/aiimage.jpeg"
+                alt=""
+                class="wow fadeInLeft img-fluid"
+              />
             </div>
           </div>
-
-          
         </div>
       </div>
     </section>
 
-
     <section class="my-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 d-flex align-items-center justify-content-center mt-5 mt-md-0 order-xs-2 order-2 order-md-0 px-md-3 px-0">
+          <div
+            class="
+              col-md-6
+              d-flex
+              align-items-center
+              justify-content-center
+              mt-5 mt-md-0
+              order-xs-2 order-2 order-md-0
+              px-md-3 px-0
+            "
+          >
             <div class="videoleft">
-              <img src="img/howitworks.png" alt="" class="wow fadeInRight img-fluid">
+              <img
+                src="img/howitworks.png"
+                alt=""
+                class="wow fadeInRight img-fluid"
+              />
             </div>
           </div>
-          <div class="col-md-6 text-container text-left d-flex align-items-center">
+          <div
+            class="col-md-6 text-container text-left d-flex align-items-center"
+          >
             <div class="text-left">
-              <h2 class="wow fadeInLeft mb-3">How does liste.ai works ?</h2>
-              <p class="wow fadeInRight" style="text-align: left;">
-                We leverage Trend-based techniques and Machine Learning Algorithms. Analyze market data every day, analyze every user transaction to give you a smart curated list.
+              <h2 class="wow fadeInLeft mb-3">How does MyStock.ai works ?</h2>
+              <p class="wow fadeInRight" style="text-align: left">
+                We leverage Trend-based techniques and Machine Learning
+                Algorithms. Analyze market data every day, analyze every user
+                transaction to give you a smart curated list.
               </p>
               <div class="videotext">
                 <ul>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     20+ years of market data
-                    <span>
-                      (Technology, Finance, Healthcare, ...)
-                    </span>
+                    <span> (Technology, Finance, Healthcare, ...) </span>
                   </li>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     8000+ stocks and ETFs
-                    <span>
-                      (Penny Stocks, ETF's, ....)
-                    </span>
+                    <span> (Penny Stocks, ETF's, ....) </span>
                   </li>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     15+ Technical indicators
-					<span>
-						(Price, Volume, Volatality, .....)
-					</span>
+                    <span> (Price, Volume, Volatality, .....) </span>
                   </li>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     12+ Fundamental Indicators
-                    <span>
-                      (Earnings, Dividend, PE ratio, ......)
-                    </span>
+                    <span> (Earnings, Dividend, PE ratio, ......) </span>
                   </li>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     200+ trading signals
-                    <span>
-                      (Over-sold/over-bought, Gaps, ......)
-                    </span>
+                    <span> (Over-sold/over-bought, Gaps, ......) </span>
                   </li>
-                  <li class="wow fadeInDown"><i class="wow fadeInLeft fa fa-check-square-o" aria-hidden="true"></i>
+                  <li class="wow fadeInDown">
+                    <i
+                      class="wow fadeInLeft fa fa-check-square-o"
+                      aria-hidden="true"
+                    ></i>
                     User Transaction history
-                    <span>
-                      (Past buy and sell transactions)
-                    </span>
+                    <span> (Past buy and sell transactions) </span>
                   </li>
                 </ul>
               </div>
@@ -319,17 +470,28 @@
       </div>
     </section> -->
 
-
     <footer class="padding50">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-3">
             <div class="footerlogo">
-              <a href=""><img src="img/Logo.png" alt="" class="img-fluid"></a>
+              <a href=""><img src="img/Logo.svg" alt="" class="img-fluid" /></a>
             </div>
           </div>
           <div class="col-12 small disclaimer mt-4">
-            Disclaimer: Liste.ai provides general investment information and reports for informational and entertainment purposes ONLY and should not be construed as individualized financial advice. If you require such advice, you must contact a certified financial planner or other dedicated professional, so they can review your unique situation and tailor their advice to you. LISTE.AI, ITS OFFICERS, AND EMPLOYEES DO NOT WARRANT THE INFORMATION PROVIDED IN ANY WAY, WHETHER IMPLIED, EXPRESS, OR BY STATUTE; NOR GUARANTEE ACCURACY, COMPLETENESS, NOR TIMELINESS; NOR GUARANTEE THE ABSENCE OF ERRORS AND OMISSIONS; AND, SHALL NOT BE HELD LIABLE FOR ANY LOSS. Investments carry risk and may lose value. Before investing, you should be aware of the risks involved and take appropriate action to mitigate risk as necessary. Liste.ai does not provide tax, legal, or financial advice.
+            Disclaimer: MyStock.ai provides general investment information and
+            reports for informational and entertainment purposes ONLY and should
+            not be construed as individualized financial advice. If you require
+            such advice, you must contact a certified financial planner or other
+            dedicated professional, so they can review your unique situation and
+            tailor their advice to you. MyStock.ai, ITS OFFICERS, AND EMPLOYEES
+            DO NOT WARRANT THE INFORMATION PROVIDED IN ANY WAY, WHETHER IMPLIED,
+            EXPRESS, OR BY STATUTE; NOR GUARANTEE ACCURACY, COMPLETENESS, NOR
+            TIMELINESS; NOR GUARANTEE THE ABSENCE OF ERRORS AND OMISSIONS; AND,
+            SHALL NOT BE HELD LIABLE FOR ANY LOSS. Investments carry risk and
+            may lose value. Before investing, you should be aware of the risks
+            involved and take appropriate action to mitigate risk as necessary.
+            MyStock.ai does not provide tax, legal, or financial advice.
           </div>
         </div>
 
@@ -348,16 +510,27 @@
         <div class="row marginRow30">
           <div class="col-md-6">
             <div class="copyright">
-              <p>Copyright © <span id="currentYear"></span> Liste.ai. All Rights Reserved.</p>
+              <p>
+                Copyright © <span id="currentYear"></span> MyStock.ai. All
+                Rights Reserved.
+              </p>
             </div>
           </div>
           <div class="col-md-6">
             <div class="socialemedia">
               <ul>
-                <li><a href=""><i class="fa fa-facebook"></i></a></li>
-                <li><a href=""><i class="fa fa-twitter"></i></a></li>
-                <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-                <li><a href=""><i class="fa fa-instagram"></i></a></li>
+                <li>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                </li>
+                <li>
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                </li>
+                <li>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
+                </li>
+                <li>
+                  <a href=""><i class="fa fa-instagram"></i></a>
+                </li>
               </ul>
             </div>
           </div>
@@ -372,13 +545,18 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/wow.min.js"></script>
-    <script>document.write('<script src="js/corousel-slider.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
+    <script>
+      document.write(
+        '<script src="js/corousel-slider.js?dev=' +
+          Math.floor(Math.random() * 100) +
+          '"\><\/script>'
+      );
+    </script>
     <script>
       new WOW().init();
       var d = new Date();
       var n = d.getFullYear();
       document.getElementById("currentYear").innerHTML = n;
     </script>
-    
   </body>
 </html>
