@@ -14,6 +14,9 @@
   right: 0;
   left: 0;
   z-index: 1030;
+  .active_nav {
+    border-bottom: 3px solid#fe8c00;
+  }
 
   .nav-item {
     a {

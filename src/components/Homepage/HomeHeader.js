@@ -19,6 +19,7 @@ import logo from "../../Assets/images/Logo.svg";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { Button as Btn } from "../Button";
 
 export const HomeHeaders = () => {
   let today = new Date().toLocaleDateString();
@@ -28,6 +29,7 @@ export const HomeHeaders = () => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+  console.log(window.location.pathname);
 
   return (
     <div className="header">
@@ -46,13 +48,21 @@ export const HomeHeaders = () => {
         </NavbarToggler>
         <Collapse navbar isOpen={!collapsed} className="float-xs-none">
           <Nav className="mr-auto" navbar>
-            <NavItem>
+            <NavItem
+              className={window.location.pathname == "/toplist" && "active_nav"}
+            >
               <Link to="/toplist"> Home</Link>
             </NavItem>
-            <NavItem>
+            <NavItem
+              className={window.location.pathname == "/ideas" && "active_nav"}
+            >
               <Link to="/ideas"> Ideas</Link>
             </NavItem>
-            <NavItem>
+            <NavItem
+              className={
+                window.location.pathname == "/transaction" && "active_nav"
+              }
+            >
               <Link to="/transaction">Transactions</Link>
             </NavItem>
           </Nav>
@@ -63,14 +73,19 @@ export const HomeHeaders = () => {
                 marginLeft: "auto",
                 maxWidth: "320px",
                 width: "100%",
-                marginRight: "1rem",
                 gap: "1rem",
               }}
             >
               <Input placeholder="Search - Symbol/Company Name" />
-              <FontAwesomeIcon icon={faUserCircle} size="2x" color="gray" />
+              <FontAwesomeIcon icon={faUserCircle} size="3x" color="gray" />
             </div>
           </Nav>
+          {/* <span className="mx-2" ju>
+            <Btn
+              buttonText={"Logout"}
+              style={{ padding: "5px 10px", paddingTop: "3px" }}
+            />
+          </span> */}
         </Collapse>
       </Navbar>
       <div className="subnav py-2 px-5">

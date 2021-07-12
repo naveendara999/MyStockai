@@ -83,7 +83,7 @@ export const StockDetails = () => {
               <div
                 style={{
                   backgroundColor: '#fff',
-                  height: '600px',
+                  height: '550px',
                 }}
                 className='shadow-lg'
               >
@@ -112,23 +112,145 @@ export const StockDetails = () => {
               <div
                 style={{
                   backgroundColor: '#fff',
-                  height: '600px',
+                  height: '550px',
                 }}
                 className='shadow-lg'
               >
                 <div className='detail_card p-4'>
-                  <div className='title'>
+                  <div className='title' style={{ margin: 'auto' }}>
                     <h4 className='mb-4'>Analyst Analysis</h4>
                     <Piegraph />
                   </div>
                 </div>
+                <Row className='mb-5'>
+                  <Col lg={6}>
+                    <div
+                      className='p-2'
+                      style={{
+                        display: 'flex',
+                        backgroundColor: '#f8f9fa',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                        Buy
+                      </span>
+                      <span
+                        className='badge badge-primary badge-pill'
+                        style={{
+                          fontSize: '12px',
+                          backgroundColor: '#0073dd',
+                        }}
+                      >
+                        7
+                      </span>
+                    </div>
+                  </Col>
+                  <Col lg={6}>
+                    <div
+                      className='p-2'
+                      style={{
+                        display: 'flex',
+                        backgroundColor: '#f8f9fa',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                        Overweight
+                      </span>
+                      <span
+                        className='badge badge-primary badge-pill'
+                        style={{
+                          fontSize: '12px',
+
+                          backgroundColor: '#0073dd',
+                        }}
+                      >
+                        10
+                      </span>
+                    </div>
+                  </Col>
+                  <Col lg={6}>
+                    <div
+                      className='p-2'
+                      style={{
+                        display: 'flex',
+                        backgroundColor: '#f8f9fa',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                        Hold
+                      </span>
+                      <span
+                        className='badge badge-primary badge-pill'
+                        style={{
+                          fontSize: '12px',
+
+                          backgroundColor: '#0073dd',
+                        }}
+                      >
+                        8
+                      </span>
+                    </div>
+                  </Col>
+                  <Col lg={6}>
+                    <div
+                      className='p-2'
+                      style={{
+                        display: 'flex',
+                        backgroundColor: '#f8f9fa',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                        Underweight
+                      </span>
+                      <span
+                        className='badge badge-primary badge-pill'
+                        style={{
+                          fontSize: '12px',
+
+                          backgroundColor: '#0073dd',
+                        }}
+                      >
+                        0
+                      </span>
+                    </div>
+                  </Col>
+                  <Col lg={6}>
+                    <div
+                      className='p-2'
+                      style={{
+                        display: 'flex',
+                        backgroundColor: '#f8f9fa',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                        sell
+                      </span>
+                      <span
+                        className='badge badge-primary badge-pill'
+                        style={{
+                          fontSize: '12px',
+
+                          backgroundColor: '#0073dd',
+                        }}
+                      >
+                        0
+                      </span>
+                    </div>
+                  </Col>
+                </Row>
               </div>
             </Col>
             <Col lg={6} className='my-2'>
               <div
                 style={{
                   backgroundColor: '#fff',
-                  height: '600px',
+                  margin: 'auto',
+                  height: '500px',
                 }}
                 className='shadow-lg'
               >
@@ -140,12 +262,11 @@ export const StockDetails = () => {
                       style={{
                         display: 'grid',
                         placeItems: 'center',
-                        height: '400px',
-                        // width: '100%',
+                        margin: ' auto',
                       }}
                     >
                       <GaugeChart
-                        style={{ width: '50%' }}
+                        style={{ width: '50%', height: '200px' }}
                         nrOfLevels={2}
                         colors={['rgb(251, 84, 122)', 'rgb(95, 22, 215)']}
                         percent={0.95}
@@ -154,6 +275,56 @@ export const StockDetails = () => {
                       />
                     </div>
                   </div>
+                  <Row className='my-4'>
+                    <Col lg={12} className='mb-2'>
+                      <div
+                        className='p-2'
+                        style={{
+                          display: 'flex',
+                          backgroundColor: '#f8f9fa',
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                          Positive
+                        </span>
+                        <span
+                          className='badge badge-primary badge-pill'
+                          style={{
+                            fontSize: '12px',
+
+                            backgroundColor: '#0073dd',
+                          }}
+                        >
+                          100 %
+                        </span>
+                      </div>
+                    </Col>
+                    <Col lg={12}>
+                      <div
+                        className='p-2'
+                        style={{
+                          display: 'flex',
+                          backgroundColor: '#f8f9fa',
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                          Negative
+                        </span>
+                        <span
+                          className='badge badge-primary badge-pill'
+                          style={{
+                            fontSize: '12px',
+
+                            backgroundColor: '#0073dd',
+                          }}
+                        >
+                          0%
+                        </span>
+                      </div>
+                    </Col>
+                  </Row>
                 </div>
               </div>
             </Col>
@@ -161,7 +332,7 @@ export const StockDetails = () => {
               <div
                 style={{
                   backgroundColor: '#fff',
-                  height: '600px',
+                  height: '500px',
                 }}
                 className='shadow-lg'
               >
@@ -178,10 +349,9 @@ export const StockDetails = () => {
                     <div
                       className='my-4'
                       style={{
+                        margin: ' auto',
                         display: 'grid',
                         placeItems: 'center',
-                        height: '400px',
-                        // width: '100%',
                       }}
                     >
                       <GaugeChart
@@ -193,6 +363,38 @@ export const StockDetails = () => {
                         animate={false}
                       />
                     </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        gap: '2rem',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <span>
+                        <div>
+                          <h4>2</h4>
+                        </div>
+                        <div>
+                          <h5>Sell</h5>
+                        </div>
+                      </span>
+                      <span>
+                        <div>
+                          <h4>8</h4>
+                        </div>
+                        <div>
+                          <h5>Neutral</h5>
+                        </div>
+                      </span>
+                      <span>
+                        <div>
+                          <h4>16</h4>
+                        </div>
+                        <div>
+                          <h5>Buy</h5>
+                        </div>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -201,7 +403,7 @@ export const StockDetails = () => {
               <div
                 style={{
                   backgroundColor: '#fff',
-                  height: '600px',
+                  height: '500px',
                 }}
                 className='shadow-lg'
               >

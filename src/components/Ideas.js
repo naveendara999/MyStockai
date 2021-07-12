@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tabs, Tab, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Container, Col, Row, Input } from 'reactstrap';
@@ -33,6 +33,7 @@ const Tr = () => {
 };
 
 const Ideas = () => {
+  const [index, setIndex] = useState(1);
   return (
     <Container style={{ marginTop: '160px' }} className='toppicks'>
       <Tabs defaultActiveKey='Trading Ideas' id='Trading Ideas'>
