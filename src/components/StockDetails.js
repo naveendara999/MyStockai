@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Button,
   ButtonGroup,
@@ -8,34 +8,34 @@ import {
   DropdownMenu,
   DropdownToggle,
   Row,
-} from 'reactstrap';
+} from "reactstrap";
 
-import { Container, Tabs, Tab } from 'react-bootstrap';
-import { Link, useParams } from 'react-router-dom';
-import alc from '../Assets/images/alkermes.svg';
-import GaugeChart from 'react-gauge-chart';
-import Piegraph from './Graphs/Piegraph';
-import BottomChart from './Graphs/BottomChart';
+import { Container, Tabs, Tab } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import alc from "../Assets/images/alkermes.svg";
+import GaugeChart from "react-gauge-chart";
+import Piegraph from "./Graphs/Piegraph";
+import BottomChart from "./Graphs/BottomChart";
 
 export const StockDetails = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const { stock = 'jg' } = useParams();
+  const { stock = "jg" } = useParams();
   console.log(stock);
   return (
-    <Container className='stockdetails'>
-      <Col className='stock_header'>
-        <Col sm={4} className='stock_about'>
-          <Link to={{ pathname: '/' }}>
-            <div className='stock_logo'>
-              <img src={alc} alt='' />
+    <Container className="stockdetails">
+      <Col className="stock_header">
+        <Col sm={4} className="stock_about">
+          <Link to={{ pathname: "/" }}>
+            <div className="stock_logo">
+              <img src={alc} alt="" />
               <div>
                 <h1>Alkermes plc</h1>
-                <div className='second_line'>
+                <div className="second_line">
                   <span>ALKS</span>
                   <span>
-                    <img src={alc} alt='' /> NASDQ
+                    <img src={alc} alt="" /> NASDQ
                   </span>
                 </div>
               </div>
@@ -45,14 +45,14 @@ export const StockDetails = () => {
       </Col>
 
       <Row>
-        <Col lg={3} style={{ height: '60px' }}>
+        <Col lg={3} style={{ height: "60px" }}>
           <div></div>
         </Col>
         <Col></Col>
-        <Col lg={3} style={{ height: '60px' }}></Col>
+        <Col lg={3} style={{ height: "60px" }}></Col>
       </Row>
 
-      <ButtonGroup className='my-3'>
+      <ButtonGroup className="my-3">
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <DropdownToggle caret>Buy with your trading platform</DropdownToggle>
           <DropdownMenu>
@@ -67,79 +67,79 @@ export const StockDetails = () => {
       </ButtonGroup>
 
       <Tabs
-        defaultActiveKey='Analysis
-'
-        id='Analysis
-'
+        defaultActiveKey="Analysis
+"
+        id="Analysis
+"
       >
         <Tab
-          eventKey='Analysis
-'
-          title='Analysis
-'
+          eventKey="Analysis
+"
+          title="Analysis
+"
         >
           <Row>
-            <Col lg={6} className='mt-4 mb-4'>
+            <Col lg={6} className="mt-4 mb-4">
               <div
                 style={{
-                  backgroundColor: '#fff',
-                  height: '550px',
+                  backgroundColor: "#fff",
+                  height: "550px",
                 }}
-                className='shadow-lg'
+                className="shadow-lg"
               >
-                <div className='detail_card p-4'>
-                  <div className='title'>
-                    <h4 className='mb-4'>Investing style</h4>
-                    <p className='mb-2 desc'>
+                <div className="detail_card p-4">
+                  <div className="title">
+                    <h4 className="mb-4">Investing style</h4>
+                    <p className="mb-2 desc">
                       Want to know if this stock suit your investment style ?
                       You are 1-step away from it.
                     </p>
-                    <p className='mb-2 desc'>
+                    <p className="mb-2 desc">
                       Click the below button to upload your old transactions
                       from any brokerages.
                     </p>
                   </div>
 
-                  <Link to='/transaction'>
-                    <Button color='warning' block className='my-5'>
+                  <Link to="/transaction">
+                    <Button color="warning" block className="my-5">
                       Upload Transactions
                     </Button>
                   </Link>
                 </div>
               </div>
             </Col>
-            <Col lg={6} className='mt-4 mb-4 '>
+            <Col lg={6} className="mt-4 mb-4 ">
               <div
                 style={{
-                  backgroundColor: '#fff',
-                  height: '550px',
+                  backgroundColor: "#fff",
+                  height: "550px",
                 }}
-                className='shadow-lg'
+                className="shadow-lg"
               >
-                <div className='detail_card p-4'>
-                  <div className='title' style={{ margin: 'auto' }}>
-                    <h4 className='mb-4'>Analyst Analysis</h4>
+                <div className="detail_card p-4">
+                  <div className="title" style={{ margin: "auto" }}>
+                    <h4 className="mb-4">Analyst Analysis</h4>
                     <Piegraph />
                   </div>
                 </div>
-                <Row className='mb-5'>
+                <Row className="mb-5">
                   <Col lg={6}>
                     <div
-                      className='p-2'
+                      className="p-2"
                       style={{
-                        display: 'flex',
-                        backgroundColor: '#f8f9fa',
-                        justifyContent: 'space-between',
+                        display: "flex",
+                        backgroundColor: "#f8f9fa",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                      <span style={{ fontSize: "16px", fontWeight: "400px" }}>
                         Buy
                       </span>
                       <span
-                        className='badge badge-primary badge-pill'
+                        className="badge badge-primary badge-pill"
                         style={{
-                          fontSize: '12px',
-                          backgroundColor: '#0073dd',
+                          fontSize: "12px",
+                          backgroundColor: "#0073dd",
                         }}
                       >
                         7
@@ -148,22 +148,22 @@ export const StockDetails = () => {
                   </Col>
                   <Col lg={6}>
                     <div
-                      className='p-2'
+                      className="p-2"
                       style={{
-                        display: 'flex',
-                        backgroundColor: '#f8f9fa',
-                        justifyContent: 'space-between',
+                        display: "flex",
+                        backgroundColor: "#f8f9fa",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                      <span style={{ fontSize: "16px", fontWeight: "400px" }}>
                         Overweight
                       </span>
                       <span
-                        className='badge badge-primary badge-pill'
+                        className="badge badge-primary badge-pill"
                         style={{
-                          fontSize: '12px',
+                          fontSize: "12px",
 
-                          backgroundColor: '#0073dd',
+                          backgroundColor: "#0073dd",
                         }}
                       >
                         10
@@ -172,22 +172,22 @@ export const StockDetails = () => {
                   </Col>
                   <Col lg={6}>
                     <div
-                      className='p-2'
+                      className="p-2"
                       style={{
-                        display: 'flex',
-                        backgroundColor: '#f8f9fa',
-                        justifyContent: 'space-between',
+                        display: "flex",
+                        backgroundColor: "#f8f9fa",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                      <span style={{ fontSize: "16px", fontWeight: "400px" }}>
                         Hold
                       </span>
                       <span
-                        className='badge badge-primary badge-pill'
+                        className="badge badge-primary badge-pill"
                         style={{
-                          fontSize: '12px',
+                          fontSize: "12px",
 
-                          backgroundColor: '#0073dd',
+                          backgroundColor: "#0073dd",
                         }}
                       >
                         8
@@ -196,22 +196,22 @@ export const StockDetails = () => {
                   </Col>
                   <Col lg={6}>
                     <div
-                      className='p-2'
+                      className="p-2"
                       style={{
-                        display: 'flex',
-                        backgroundColor: '#f8f9fa',
-                        justifyContent: 'space-between',
+                        display: "flex",
+                        backgroundColor: "#f8f9fa",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                      <span style={{ fontSize: "16px", fontWeight: "400px" }}>
                         Underweight
                       </span>
                       <span
-                        className='badge badge-primary badge-pill'
+                        className="badge badge-primary badge-pill"
                         style={{
-                          fontSize: '12px',
+                          fontSize: "12px",
 
-                          backgroundColor: '#0073dd',
+                          backgroundColor: "#0073dd",
                         }}
                       >
                         0
@@ -220,22 +220,22 @@ export const StockDetails = () => {
                   </Col>
                   <Col lg={6}>
                     <div
-                      className='p-2'
+                      className="p-2"
                       style={{
-                        display: 'flex',
-                        backgroundColor: '#f8f9fa',
-                        justifyContent: 'space-between',
+                        display: "flex",
+                        backgroundColor: "#f8f9fa",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                      <span style={{ fontSize: "16px", fontWeight: "400px" }}>
                         sell
                       </span>
                       <span
-                        className='badge badge-primary badge-pill'
+                        className="badge badge-primary badge-pill"
                         style={{
-                          fontSize: '12px',
+                          fontSize: "12px",
 
-                          backgroundColor: '#0073dd',
+                          backgroundColor: "#0073dd",
                         }}
                       >
                         0
@@ -245,55 +245,55 @@ export const StockDetails = () => {
                 </Row>
               </div>
             </Col>
-            <Col lg={6} className='my-2'>
+            <Col lg={6} className="my-2">
               <div
                 style={{
-                  backgroundColor: '#fff',
-                  margin: 'auto',
-                  height: '500px',
+                  backgroundColor: "#fff",
+                  margin: "auto",
+                  height: "500px",
                 }}
-                className='shadow-lg'
+                className="shadow-lg"
               >
-                <div className='detail_card p-4'>
-                  <div className='title'>
+                <div className="detail_card p-4">
+                  <div className="title">
                     <h4>Social Sentiment</h4>
                     <div
-                      className='my-4'
+                      className="my-4"
                       style={{
-                        display: 'grid',
-                        placeItems: 'center',
-                        margin: ' auto',
+                        display: "grid",
+                        placeItems: "center",
+                        margin: " auto",
                       }}
                     >
                       <GaugeChart
-                        style={{ width: '50%', height: '200px' }}
+                        style={{ width: "50%", height: "200px" }}
                         nrOfLevels={2}
-                        colors={['rgb(251, 84, 122)', 'rgb(95, 22, 215)']}
+                        colors={["rgb(251, 84, 122)", "rgb(95, 22, 215)"]}
                         percent={0.95}
-                        textColor={'black'}
+                        textColor={"black"}
                         animate={false}
                       />
                     </div>
                   </div>
-                  <Row className='my-4'>
-                    <Col lg={12} className='mb-2'>
+                  <Row className="my-4">
+                    <Col lg={12} className="mb-2">
                       <div
-                        className='p-2'
+                        className="p-2"
                         style={{
-                          display: 'flex',
-                          backgroundColor: '#f8f9fa',
-                          justifyContent: 'space-between',
+                          display: "flex",
+                          backgroundColor: "#f8f9fa",
+                          justifyContent: "space-between",
                         }}
                       >
-                        <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                        <span style={{ fontSize: "16px", fontWeight: "400px" }}>
                           Positive
                         </span>
                         <span
-                          className='badge badge-primary badge-pill'
+                          className="badge badge-primary badge-pill"
                           style={{
-                            fontSize: '12px',
+                            fontSize: "12px",
 
-                            backgroundColor: '#0073dd',
+                            backgroundColor: "#0073dd",
                           }}
                         >
                           100 %
@@ -302,22 +302,22 @@ export const StockDetails = () => {
                     </Col>
                     <Col lg={12}>
                       <div
-                        className='p-2'
+                        className="p-2"
                         style={{
-                          display: 'flex',
-                          backgroundColor: '#f8f9fa',
-                          justifyContent: 'space-between',
+                          display: "flex",
+                          backgroundColor: "#f8f9fa",
+                          justifyContent: "space-between",
                         }}
                       >
-                        <span style={{ fontSize: '16px', fontWeight: '400px' }}>
+                        <span style={{ fontSize: "16px", fontWeight: "400px" }}>
                           Negative
                         </span>
                         <span
-                          className='badge badge-primary badge-pill'
+                          className="badge badge-primary badge-pill"
                           style={{
-                            fontSize: '12px',
+                            fontSize: "12px",
 
-                            backgroundColor: '#0073dd',
+                            backgroundColor: "#0073dd",
                           }}
                         >
                           0%
@@ -328,46 +328,46 @@ export const StockDetails = () => {
                 </div>
               </div>
             </Col>
-            <Col lg={6} className='my-2 '>
+            <Col lg={6} className="my-2 ">
               <div
                 style={{
-                  backgroundColor: '#fff',
-                  height: '500px',
+                  backgroundColor: "#fff",
+                  height: "500px",
                 }}
-                className='shadow-lg'
+                className="shadow-lg"
               >
-                <div className='detail_card p-4'>
-                  <div style={{ textAlign: 'center' }}>
-                    <div className='title '>
+                <div className="detail_card p-4">
+                  <div style={{ textAlign: "center" }}>
+                    <div className="title ">
                       <h4>
-                        Technical Analysis for{' '}
-                        <Link to='#' style={{ textDecoration: 'none' }}>
+                        Technical Analysis for{" "}
+                        <Link to="#" style={{ textDecoration: "none" }}>
                           ALKS
                         </Link>
                       </h4>
                     </div>
                     <div
-                      className='my-4'
+                      className="my-4"
                       style={{
-                        margin: ' auto',
-                        display: 'grid',
-                        placeItems: 'center',
+                        margin: " auto",
+                        display: "grid",
+                        placeItems: "center",
                       }}
                     >
                       <GaugeChart
-                        style={{ width: '50%' }}
+                        style={{ width: "50%" }}
                         nrOfLevels={5}
-                        colors={['rgb(251, 84, 122)', 'rgb(95, 22, 215)']}
+                        colors={["rgb(251, 84, 122)", "rgb(95, 22, 215)"]}
                         percent={0.67}
-                        textColor={'black'}
+                        textColor={"black"}
                         animate={false}
                       />
                     </div>
                     <div
                       style={{
-                        display: 'flex',
-                        gap: '2rem',
-                        justifyContent: 'center',
+                        display: "flex",
+                        gap: "2rem",
+                        justifyContent: "center",
                       }}
                     >
                       <span>
@@ -399,13 +399,14 @@ export const StockDetails = () => {
                 </div>
               </div>
             </Col>
-            <Col className='my-4' lg={12}>
+            <Col className="my-4" lg={12}>
               <div
                 style={{
-                  backgroundColor: '#fff',
-                  height: '500px',
+                  display: "flex",
+                  backgroundColor: "#fff",
+                  height: "500px",
                 }}
-                className='shadow-lg'
+                className="shadow-lg"
               >
                 <BottomChart />
               </div>
@@ -413,10 +414,10 @@ export const StockDetails = () => {
           </Row>
         </Tab>
         <Tab
-          eventKey='Stock Features
-'
-          title='Stock Features
-'
+          eventKey="Stock Features
+"
+          title="Stock Features
+"
           disabled
         ></Tab>
       </Tabs>

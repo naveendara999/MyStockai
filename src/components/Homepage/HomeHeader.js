@@ -18,18 +18,29 @@ import { Button } from "react-bootstrap";
 import logo from "../../Assets/images/Logo.svg";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { Button as Btn } from "../Button";
 
 export const HomeHeaders = () => {
   let today = new Date().toLocaleDateString();
   const [collapsed, setCollapsed] = useState(true);
-
+  const history = useHistory();
   const toggleNavbar = () => setCollapsed(!collapsed);
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
   console.log(window.location.pathname);
+
+  const logout = () => {
+    localStorage.removeItem("UserAuthenticated");
+    history.push("/login");
+  };
+
+  const UserAuthenticated = localStorage.getItem("UserAuthenticated");
+
+  if (!UserAuthenticated) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div className="header">
@@ -80,12 +91,13 @@ export const HomeHeaders = () => {
               <FontAwesomeIcon icon={faUserCircle} size="3x" color="gray" />
             </div>
           </Nav>
-          {/* <span className="mx-2" ju>
+          <span className="mx-2" ju>
             <Btn
               buttonText={"Logout"}
+              onClick={logout}
               style={{ padding: "5px 10px", paddingTop: "3px" }}
             />
-          </span> */}
+          </span>
         </Collapse>
       </Navbar>
       <div className="subnav py-2 px-5">

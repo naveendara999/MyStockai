@@ -60,7 +60,13 @@ class AreaChartWithEdge extends React.Component {
             displayFormat={format(".2f")}
           />
 
-          <AreaSeries yAccessor={(d) => d.close} />
+          <AreaSeries
+            yAccessor={(d) => d.close}
+            stroke
+            fill={false ? "#FF0000" : "#6BA583"}
+            opacity={0.4}
+            widthRatio={1}
+          />
 
           <SingleValueTooltip
             xLabel="Date"
@@ -80,6 +86,7 @@ class AreaChartWithEdge extends React.Component {
         </Chart>
         <Chart
           id={2}
+          fill="#333"
           yExtents={(d) => d.volume}
           height={150}
           origin={(w, h) => [0, h - 150]}
@@ -100,7 +107,7 @@ class AreaChartWithEdge extends React.Component {
           <BarSeries
             yAccessor={(d) => d.volume}
             stroke
-            fill={(d) => (d.close > d.open ? "#6BA583" : "#FF0000")}
+            fill={(d) => (d.date > Date() ? "#6BA583" : "#FF0000")}
             opacity={0.4}
             widthRatio={1}
           />

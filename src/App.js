@@ -5,7 +5,12 @@ import Banner from "./components/Banner";
 import Helpsection from "./components/Helpsection";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { HomeHeaders } from "./components/Homepage/HomeHeader";
@@ -40,10 +45,14 @@ AOS.init({
 });
 
 function App() {
-  const { user: currentUser } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const UserAuthenticated = localStorage.getItem("UserAuthenticated");
+
+  // if (UserAuthenticated) {
+  //   return <Redirect to="/toplist" />;
+  // }
   return (
     <Router>
+      {UserAuthenticated ? <Redirect to="/toplist" /> : ""}
       <Switch>
         <Route exact path="/">
           <Header />

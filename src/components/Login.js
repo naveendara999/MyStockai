@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Row } from "reactstrap";
 import logo from "./../Assets/images/Logo.svg";
@@ -9,8 +9,7 @@ import logo from "./../Assets/images/Logo.svg";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
-import { login } from "../actions/auth";
+import * as AuthActions from "../redux/actions/authActions";
 
 const required = (value) => {
   if (!value) {
@@ -26,13 +25,14 @@ const Login = (props) => {
   const checkBtn = useRef();
 
   const [emailid, setemailid] = useState("");
-  const [password_, setPassword_] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { isLoggedIn } = useSelector((state) => state.auth);
-  const { message } = useSelector((state) => state.message);
-
   const dispatch = useDispatch();
+
+  const value = useSelector((state) => state.authData.loginData);
+
+  const history = useHistory();
 
   const onChangeemailid = (e) => {
     const emailid = e.target.value;
@@ -40,33 +40,32 @@ const Login = (props) => {
   };
 
   const onChangePassword = (e) => {
-    const password_ = e.target.value;
-    setPassword_(password_);
+    const password = e.target.value;
+    setPassword(password);
   };
 
+  if (value.isSuccess && value.Login && loading) {
+    setLoading(false);
+    history.push("/toplist");
+    localStorage.setItem("UserAuthenticated", value.Login);
+  } else if (value.isSuccess && !value.Login && loading) {
+    setLoading(false);
+    // alert(value.Message);
+  }
   const handleLogin = (e) => {
     e.preventDefault();
-
-    // setLoading(true);
-
+    setLoading(true);
     form.current.validateAll();
-    console.log(emailid, password_);
-
     if (emailid.length > 0) {
-      dispatch(login(emailid, password_))
-        .then(() => {
-          props.history.push("/toplist");
-          window.location.reload();
-        })
-        .catch(() => {
-          setLoading(false);
-        });
+      dispatch(AuthActions.loginAction(emailid, password));
     } else {
       setLoading(false);
     }
   };
 
-  if (isLoggedIn) {
+  const UserAuthenticated = localStorage.getItem("UserAuthenticated");
+
+  if (UserAuthenticated) {
     return <Redirect to="/toplist" />;
   }
   return (
@@ -99,13 +98,13 @@ const Login = (props) => {
             <div className="form-group mt-3">
               <Input
                 id="examplePassword_"
-                type="password_"
+                type="password"
                 className="form-control"
-                name="password_"
-                value={password_}
+                name="password"
+                value={password}
                 onChange={onChangePassword}
                 validations={[required]}
-                placeholder="Password_ "
+                placeholder="Password"
               />
             </div>
 
@@ -124,13 +123,21 @@ const Login = (props) => {
               </button>
             </div>
 
-            {message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {message}
+            {value.isSuccess &&
+              (value.Login ? (
+                ""
+              ) : (
+                // <div className="form-group">
+                //   <div className="alert alert-success" role="alert">
+                //     {value.Message}
+                //   </div>
+                // </div>
+                <div className="form-group">
+                  <div className="alert alert-danger" role="alert">
+                    {value.Message}
+                  </div>
                 </div>
-              </div>
-            )}
+              ))}
           </Form>
           <p className="agreeto">
             <Link to="https://www.liste.ai/terms.html" target="_blank">
