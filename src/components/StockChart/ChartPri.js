@@ -36,7 +36,7 @@ class AreaChartWithEdge extends React.Component {
         height={400}
         ratio={ratio}
         width={width}
-        margin={{ left: 70, right: 0, top: 20, bottom: 30 }}
+        margin={{ left: 0, right: 70, top: 20, bottom: 30 }}
         type={type}
         seriesName="MSFT"
         data={data}
@@ -47,7 +47,7 @@ class AreaChartWithEdge extends React.Component {
       >
         <Chart id={1} yExtents={(d) => [d.high, d.low]}>
           <XAxis axisAt="bottom" orient="bottom" />
-          {/* <YAxis ticks={5} /> */}
+          <YAxis axisAt="right" orient="right" />
 
           <MouseCoordinateX
             at="bottom"
@@ -60,36 +60,42 @@ class AreaChartWithEdge extends React.Component {
             displayFormat={format(".2f")}
           />
 
-          <AreaSeries yAccessor={(d) => d.close} />
-
+          <AreaSeries
+            yAccessor={(d) => d.close}
+            stroke
+            fill={true ? "#FF0000" : "#6BA583"}
+            opacity={0.4}
+            widthRatio={1}
+          />
+          {/* 
           <SingleValueTooltip
             xLabel="Date"
-            /* xLabel is optional, absence will not show the x value */ yLabel="C"
+            yLabel="C"
             yAccessor={(d) => d.close}
             xDisplayFormat={timeFormat("%Y-%m-%d")}
-            yDisplayFormat={format(".2f")}
-            /* valueStroke="green" - optional prop */
-            /* labelStroke="#4682B4" - optional prop */
+          
             origin={[-40, 0]}
           />
-          <SingleValueTooltip
+           */}
+          {/* <SingleValueTooltip
             yLabel="Volume"
             yAccessor={(d) => d.volume}
             origin={[-40, 20]}
-          />
+          /> */}
         </Chart>
         <Chart
           id={2}
+          fill="#333"
           yExtents={(d) => d.volume}
           height={150}
           origin={(w, h) => [0, h - 150]}
         >
-          <YAxis
+          {/* <YAxis
             axisAt="left"
             orient="left"
             ticks={5}
             tickFormat={format(".2s")}
-          />
+          /> */}
 
           <MouseCoordinateY
             at="left"
@@ -97,15 +103,15 @@ class AreaChartWithEdge extends React.Component {
             displayFormat={format(".4s")}
           />
 
-          <BarSeries
+          {/* <BarSeries
             yAccessor={(d) => d.volume}
             stroke
-            fill={(d) => (d.close > d.open ? "#6BA583" : "#FF0000")}
+            fill={(d) => (d.date > Date() ? "#6BA583" : "#FF0000")}
             opacity={0.4}
             widthRatio={1}
-          />
+          /> */}
         </Chart>
-        <CrossHairCursor />
+        {/* <CrossHairCursor /> */}
       </ChartCanvas>
     );
   }

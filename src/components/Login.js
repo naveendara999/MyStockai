@@ -46,8 +46,8 @@ const Login = (props) => {
 
   if (value.isSuccess && value.Login && loading) {
     setLoading(false);
-    history.push("/toplist");
     localStorage.setItem("UserAuthenticated", value.Login);
+    <Redirect to="/toplist" />;
   } else if (value.isSuccess && !value.Login && loading) {
     setLoading(false);
     // alert(value.Message);

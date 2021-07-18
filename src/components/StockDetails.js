@@ -16,6 +16,7 @@ import alc from "../Assets/images/alkermes.svg";
 import GaugeChart from "react-gauge-chart";
 import Piegraph from "./Graphs/Piegraph";
 import BottomChart from "./Graphs/BottomChart";
+import PriBottomChart from "./Graphs/PriBottomGraph";
 
 export const StockDetails = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -399,16 +400,26 @@ export const StockDetails = () => {
                 </div>
               </div>
             </Col>
-            <Col className="my-4" lg={12}>
+            <Col className="my-4" lg={9}>
               <div
                 style={{
                   display: "flex",
                   backgroundColor: "#fff",
                   height: "500px",
                 }}
-                className="shadow-lg"
               >
                 <BottomChart />
+              </div>
+            </Col>
+            <Col className="my-4" lg={3}>
+              <div
+                style={{
+                  display: "flex",
+                  backgroundColor: "#fff",
+                  height: "500px",
+                }}
+              >
+                <PriBottomChart />
               </div>
             </Col>
           </Row>

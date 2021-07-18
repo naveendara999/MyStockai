@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -15,11 +16,15 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
+  const history = useHistory();
+
   return (
     <div className="header">
       <Navbar color="light" expand="lg" style={{ padding: "0.5rem 1rem" }}>
-        <NavbarBrand href="/">
-          <img src={logo} alt="" width="200" />
+        <NavbarBrand>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <img src={logo} alt="" width="200" />
+          </Link>
         </NavbarBrand>
         <NavbarToggler onClick={toggle}>
           <span className="navbar-toggler-icon">
@@ -28,15 +33,16 @@ function Header() {
         </NavbarToggler>
         <Collapse isOpen={isOpen} navbar>
           <Nav style={{ marginLeft: "auto" }} navbar>
-            <NavLink href="/signup">
-              <Button
-                buttonText="Create account
-"
-              />
+            <NavLink href="">
+              <Link to="/signup" style={{ textDecoration: "none" }}>
+                <Button buttonText="Create account" />
+              </Link>
             </NavLink>
 
-            <NavLink href="/login">
-              <Button buttonText="Login" />
+            <NavLink href="" onClick={() => history.push("/login")}>
+              <Link to="/login" style={{ textDecoration: "none" }}>
+                <Button buttonText="Login" />
+              </Link>
             </NavLink>
           </Nav>
         </Collapse>

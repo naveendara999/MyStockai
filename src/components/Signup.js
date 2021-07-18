@@ -28,6 +28,15 @@ const Signup = () => {
     phonenumber: "",
     password: "",
   });
+  const [validate, setvalidate] = React.useState({
+    firstname: false,
+    lastname: false,
+    age: false,
+    email: false,
+    phonenumber: false,
+    password: false,
+  });
+
   const [loading, setLoading] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -38,6 +47,14 @@ const Signup = () => {
       ...account,
       [e.target.name]: e.target.value,
     });
+    setvalidate({
+      firstname: false,
+      lastname: false,
+      age: false,
+      email: false,
+      phonenumber: false,
+      password: false,
+    });
   };
 
   if (value.isSuccess && loading) {
@@ -46,7 +63,59 @@ const Signup = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
-    if (account.email.length > 0 && account.password.length > 0) {
+
+    if (account.firstname.length === 0) {
+      setvalidate({
+        ...validate,
+        firstname: true,
+      });
+    } else if (account.lastname.length === 0) {
+      setvalidate({
+        ...validate,
+        lastname: true,
+      });
+    } else if (account.age.length < 2 || account.age.length > 2) {
+      setvalidate({
+        ...validate,
+        age: true,
+      });
+    } else if (account.email.length === 0) {
+      setvalidate({
+        ...validate,
+        email: true,
+      });
+    } else if (account.password.length === 0) {
+      setvalidate({
+        ...validate,
+        password: true,
+      });
+    } else if (
+      account.phonenumber.length < 10 ||
+      account.phonenumber.length > 10
+    ) {
+      setvalidate({
+        ...validate,
+        phonenumber: true,
+      });
+    } else {
+      setvalidate({
+        firstname: false,
+        lastname: false,
+        age: false,
+        email: false,
+        phonenumber: false,
+        password: false,
+      });
+    }
+
+    if (
+      account.email.length > 0 &&
+      account.password.length > 0 &&
+      account.firstname.length > 0 &&
+      account.lastname.length > 0 &&
+      account.age.length === 2 &&
+      account.phonenumber.length === 10
+    ) {
       setLoading(true);
       dispatch(AuthActions.signupAction(account));
     } else {
@@ -80,6 +149,7 @@ const Signup = () => {
           <Form onSubmit={handleSignup} ref={form}>
             <FormGroup className="mt-3 ">
               <Input
+                required
                 type="text"
                 name="firstname"
                 id="firstname"
@@ -88,8 +158,14 @@ const Signup = () => {
                 onChange={handleChange}
               />
             </FormGroup>
+            {validate.firstname && (
+              <div className="alert alert-danger" role="alert">
+                This field is required!
+              </div>
+            )}
             <FormGroup className="mt-3 ">
               <Input
+                required
                 type="text"
                 name="lastname"
                 id="lastname"
@@ -98,11 +174,28 @@ const Signup = () => {
                 onChange={handleChange}
               />
             </FormGroup>
-            <FormGroup className="mt-3 ">
-              <Input type="text" name="age" id="age" placeholder="Age" />
-            </FormGroup>
+            {validate.lastname && (
+              <div className="alert alert-danger" role="alert">
+                This field is required!
+              </div>
+            )}
             <FormGroup className="mt-3 ">
               <Input
+                type="number"
+                name="age"
+                id="age"
+                placeholder="Age"
+                onChange={handleChange}
+              />
+            </FormGroup>
+            {validate.age && (
+              <div className="alert alert-danger" role="alert">
+                Please Enter Your Age In 2 Digit Ex: 09, 25
+              </div>
+            )}
+            <FormGroup className="mt-3 ">
+              <Input
+                required
                 type="email"
                 name="email"
                 id="exampleEmail"
@@ -112,9 +205,15 @@ const Signup = () => {
                 onChange={handleChange}
               />
             </FormGroup>
+            {validate.email && (
+              <div className="alert alert-danger" role="alert">
+                This field is required!
+              </div>
+            )}
             <FormGroup className="mt-3 ">
               <Input
-                type="text"
+                required
+                type="number"
                 name="phonenumber"
                 id="phonenumber"
                 placeholder="Phone number"
@@ -125,9 +224,14 @@ const Signup = () => {
                 Standard call, messaging or data rates may apply.
               </FormText>
             </FormGroup>
-
+            {validate.phonenumber && (
+              <div className="alert alert-danger" role="alert">
+                Please Enter Your 10 Digit Phone Number
+              </div>
+            )}
             <FormGroup className="mt-3">
               <Input
+                required
                 type="password"
                 name="password"
                 id="examplePassword"
@@ -136,6 +240,11 @@ const Signup = () => {
                 onChange={handleChange}
               />
             </FormGroup>
+            {validate.password && (
+              <div className="alert alert-danger" role="alert">
+                This field is required!
+              </div>
+            )}
 
             <div className="form-group">
               <button
@@ -152,7 +261,7 @@ const Signup = () => {
             </div>
 
             {value.isSuccess &&
-              (value.isSuccess ? (
+              (value.isSuccess && value.Message === "Registerd" ? (
                 <div className="form-group">
                   <div className="alert alert-success" role="alert">
                     {value.Message}
