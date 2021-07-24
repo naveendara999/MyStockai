@@ -31,7 +31,7 @@ function TopPicks() {
 
   React.useEffect(() => {
     dispatch(StockActions.stockListAction());
-    dispatch(FavStockActions.getFavStockListAction());
+    // dispatch(FavStockActions.getFavStockListAction());
   }, []);
 
   const [FavoritesList, setFavoritesList] = useState([]);
