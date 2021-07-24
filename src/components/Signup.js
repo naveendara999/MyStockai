@@ -1,20 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { Row } from "reactstrap";
 import logo from "./../Assets/images/Logo.svg";
-import { Button, Form, FormGroup, Input, FormText } from "reactstrap";
+import { Button, FormGroup, FormText } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import * as AuthActions from "../redux/actions/authActions";
-
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
+import validator from "validator";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
 
 const Signup = () => {
   const form = React.useRef();
@@ -38,7 +31,7 @@ const Signup = () => {
   });
 
   const [loading, setLoading] = React.useState(false);
-
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const value = useSelector((state) => state.authData.signupData);
@@ -57,64 +50,72 @@ const Signup = () => {
     });
   };
 
-  if (value.isSuccess && loading) {
+  const required = (value) => {
+    if (!value) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          This field is required!
+        </div>
+      );
+    }
+  };
+
+  const email = (emailid) => {
+    if (!validator.isEmail(emailid)) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          {emailid} is not a valid email.
+        </div>
+      );
+    }
+  };
+
+  const age = (value) => {
+    if (value.length != 2) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          Please Enter 2 Digit Number Ex: 21, 23
+        </div>
+      );
+    }
+  };
+
+  const phone = (value) => {
+    if (value != "" && value.length != 11) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          Please Enter 11 digit phone number Ex- 0(213)121221
+        </div>
+      );
+    }
+  };
+
+  const password = (value) => {
+    if (value.length < 8) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          Please Enter Minimum 8 characters long.
+        </div>
+      );
+    }
+  };
+
+  if (value.isSuccess && value.Message === "Registerd" && loading) {
+    setLoading(false);
+    console.log("Register but not redirect");
+    history.push("/login");
+  } else if (value.isSuccess && loading) {
     setLoading(false);
   }
 
   const handleSignup = (e) => {
     e.preventDefault();
-
-    if (account.firstname.length === 0) {
-      setvalidate({
-        ...validate,
-        firstname: true,
-      });
-    } else if (account.lastname.length === 0) {
-      setvalidate({
-        ...validate,
-        lastname: true,
-      });
-    } else if (account.age.length < 2 || account.age.length > 2) {
-      setvalidate({
-        ...validate,
-        age: true,
-      });
-    } else if (account.email.length === 0) {
-      setvalidate({
-        ...validate,
-        email: true,
-      });
-    } else if (account.password.length === 0) {
-      setvalidate({
-        ...validate,
-        password: true,
-      });
-    } else if (
-      account.phonenumber.length < 10 ||
-      account.phonenumber.length > 10
-    ) {
-      setvalidate({
-        ...validate,
-        phonenumber: true,
-      });
-    } else {
-      setvalidate({
-        firstname: false,
-        lastname: false,
-        age: false,
-        email: false,
-        phonenumber: false,
-        password: false,
-      });
-    }
-
+    form.current.validateAll();
     if (
       account.email.length > 0 &&
-      account.password.length > 0 &&
+      account.password.length >= 8 &&
       account.firstname.length > 0 &&
-      account.lastname.length > 0 &&
-      account.age.length === 2 &&
-      account.phonenumber.length === 10
+      account.age.length === 2
     ) {
       setLoading(true);
       dispatch(AuthActions.signupAction(account));
@@ -147,8 +148,9 @@ const Signup = () => {
             </p>
           </div>
           <Form onSubmit={handleSignup} ref={form}>
-            <FormGroup className="mt-3 ">
+            <div className="form-group mt-3 ">
               <Input
+                className="form-control"
                 required
                 type="text"
                 name="firstname"
@@ -157,15 +159,11 @@ const Signup = () => {
                 value={account.firstname}
                 onChange={handleChange}
               />
-            </FormGroup>
-            {validate.firstname && (
-              <div className="alert alert-danger" role="alert">
-                This field is required!
-              </div>
-            )}
-            <FormGroup className="mt-3 ">
+            </div>
+
+            <div className="form-group mt-3 ">
               <Input
-                required
+                className="form-control"
                 type="text"
                 name="lastname"
                 id="lastname"
@@ -173,90 +171,75 @@ const Signup = () => {
                 value={account.lastname}
                 onChange={handleChange}
               />
-            </FormGroup>
-            {validate.lastname && (
-              <div className="alert alert-danger" role="alert">
-                This field is required!
-              </div>
-            )}
-            <FormGroup className="mt-3 ">
+            </div>
+
+            <div className="form-group mt-3 ">
               <Input
+                className="form-control"
                 type="number"
+                required
                 name="age"
                 id="age"
                 placeholder="Age"
+                validations={[required, age]}
                 onChange={handleChange}
               />
-            </FormGroup>
-            {validate.age && (
-              <div className="alert alert-danger" role="alert">
-                Please Enter Your Age In 2 Digit Ex: 09, 25
-              </div>
-            )}
-            <FormGroup className="mt-3 ">
+            </div>
+
+            <div className="form-group mt-3 ">
               <Input
+                className="form-control"
                 required
                 type="email"
                 name="email"
                 id="exampleEmail"
                 placeholder="Email address"
+                validations={[required, email]}
                 value={account.email}
-                validations={[required]}
                 onChange={handleChange}
               />
-            </FormGroup>
-            {validate.email && (
-              <div className="alert alert-danger" role="alert">
-                This field is required!
-              </div>
-            )}
-            <FormGroup className="mt-3 ">
+            </div>
+
+            <div className="form-group mt-3 ">
               <Input
-                required
+                className="form-control"
                 type="number"
                 name="phonenumber"
                 id="phonenumber"
-                placeholder="Phone number"
+                placeholder="Phone number without country code"
                 value={account.phonenumber}
+                validations={[phone]}
                 onChange={handleChange}
               />
               <FormText color="muted">
                 Standard call, messaging or data rates may apply.
               </FormText>
-            </FormGroup>
-            {validate.phonenumber && (
-              <div className="alert alert-danger" role="alert">
-                Please Enter Your 10 Digit Phone Number
-              </div>
-            )}
-            <FormGroup className="mt-3">
+            </div>
+
+            <div className="form-group mt-3">
               <Input
                 required
+                className="form-control"
                 type="password"
                 name="password"
                 id="examplePassword"
                 placeholder="Password "
                 value={account.password}
+                validations={[required, password]}
                 onChange={handleChange}
               />
-            </FormGroup>
-            {validate.password && (
-              <div className="alert alert-danger" role="alert">
-                This field is required!
-              </div>
-            )}
+            </div>
 
             <div className="form-group">
               <button
                 className="btn btn-primary btn-block btn-lg  mt-3"
                 style={{ width: "100%" }}
                 disabled={loading}
-                onClick={handleSignup}
               >
                 {loading && (
                   <span className="spinner-border spinner-border-sm"></span>
                 )}
-                <span>Submit</span>
+                <span>Sign up</span>
               </button>
             </div>
 
@@ -276,7 +259,7 @@ const Signup = () => {
               ))}
           </Form>
           {/* <Button
-            className="mt-3"
+            className="form-group mt-3"
             color="primary"
             size="lg"
             onClick={handleSignup}

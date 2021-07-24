@@ -1,23 +1,38 @@
 import React, { useState } from "react";
 import { Tabs, Tab, Table, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, StaticRouter } from "react-router-dom";
 import { Container, Col, Row, Form, FormGroup, Input } from "reactstrap";
 import SectorsCard from "./SectorsCard";
-
+import * as StockActions from "../../../redux/actions/stockListActions";
+import { useDispatch, useSelector } from "react-redux";
 function TopPicks() {
   const tableHeader = [
-    "Company",
-    "Trend",
-    "Price",
-    "Volume",
-    "Dividend",
-    "P/E",
-    "Market Cap",
-    "Industry",
-    "Action",
+    "Stock name",
+    "date",
+    "close",
+    "high",
+    "low",
+    "open",
+    "volume",
+    "adjClose",
+    "adjHigh",
+    "adjLow",
+    "adjOpen",
+    "adjVolume",
+    "divCash",
+    "splitFactor",
   ];
-  // fdg
+
+  const dispatch = useDispatch();
+
+  const stockList = useSelector((state) => state.stockListData.data);
+
+  React.useEffect(() => {
+    dispatch(StockActions.stockListAction());
+  }, []);
+
   const [FavoritesList, setFavoritesList] = useState([]);
+
   console.log(setFavoritesList);
   return (
     <Container style={{ marginTop: "160px" }} className="toppicks">
@@ -42,118 +57,27 @@ function TopPicks() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <Link to="stockdetails/alks">ALKS</Link>
-                </td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Add to Favorites</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Add to Favorites</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
+              {stockList &&
+                stockList.map((list, index) => (
+                  <tr>
+                    <td>
+                      <Link to="stockdetails/alks">{list.symbol}</Link>
+                    </td>
+                    <td>{list.date}</td>
+                    <td>{list.close}</td>
+                    <td>{list.high}</td>
+                    <td>{list.low}</td>
+                    <td>{list.open}</td>
+                    <td>{list.volume}</td>
+                    <td>{list.adjClose}</td>
+                    <td>{list.adjHigh}</td>
+                    <td>{list.adjLow}</td>
+                    <td>{list.adjOpen}</td>
+                    <td>{list.adjVolume}</td>
+                    <td>{list.divCash}</td>
+                    <td>{list.splitFactor}</td>
+                  </tr>
+                ))}
             </tbody>
           </Table>
         </Tab>

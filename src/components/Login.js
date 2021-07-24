@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Row } from "reactstrap";
 import logo from "./../Assets/images/Logo.svg";
 // import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-
+import validator from "validator";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -20,6 +20,7 @@ const required = (value) => {
     );
   }
 };
+
 const Login = (props) => {
   const form = useRef();
   const checkBtn = useRef();
@@ -33,6 +34,16 @@ const Login = (props) => {
   const value = useSelector((state) => state.authData.loginData);
 
   const history = useHistory();
+
+  const email = (emailid) => {
+    if (!validator.isEmail(emailid)) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          {emailid} is not a valid email.;
+        </div>
+      );
+    }
+  };
 
   const onChangeemailid = (e) => {
     const emailid = e.target.value;
@@ -52,11 +63,12 @@ const Login = (props) => {
     setLoading(false);
     // alert(value.Message);
   }
+
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
     form.current.validateAll();
-    if (emailid.length > 0) {
+    if (emailid.length > 0 && password.length >= 8) {
       dispatch(AuthActions.loginAction(emailid, password));
     } else {
       setLoading(false);
@@ -90,7 +102,7 @@ const Login = (props) => {
                 name="emailid"
                 value={emailid}
                 onChange={onChangeemailid}
-                validations={[required]}
+                validations={[required, email]}
                 placeholder="Email address"
               />
             </div>

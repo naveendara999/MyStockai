@@ -64,7 +64,7 @@ export const StockDetails = () => {
           </DropdownMenu>
         </Dropdown>
         <Button caret>Add to Favorite List & track everyday</Button>
-        <Button>Add Notes</Button>
+        {/* <Button>Add Notes</Button> */}
       </ButtonGroup>
 
       <Tabs
@@ -246,7 +246,7 @@ export const StockDetails = () => {
                 </Row>
               </div>
             </Col>
-            <Col lg={6} className="my-2">
+            {/* <Col lg={6} className="my-2">
               <div
                 style={{
                   backgroundColor: "#fff",
@@ -399,28 +399,22 @@ export const StockDetails = () => {
                   </div>
                 </div>
               </div>
+            </Col>*/}
+            <Col
+              className="my-4"
+              lg={9}
+              style={{ marginRight: "0", paddingRight: "0" }}
+            >
+              <div>Historical Data</div>
+              <BottomChart />
             </Col>
-            <Col className="my-4" lg={9}>
-              <div
-                style={{
-                  display: "flex",
-                  backgroundColor: "#fff",
-                  height: "500px",
-                }}
-              >
-                <BottomChart />
-              </div>
-            </Col>
-            <Col className="my-4" lg={3}>
-              <div
-                style={{
-                  display: "flex",
-                  backgroundColor: "#fff",
-                  height: "500px",
-                }}
-              >
-                <PriBottomChart />
-              </div>
+            <Col
+              className="my-4"
+              lg={3}
+              style={{ marginLeft: "0", paddingLeft: "0" }}
+            >
+              <div>Forcast Data</div>
+              <PriBottomChart />
             </Col>
           </Row>
         </Tab>
