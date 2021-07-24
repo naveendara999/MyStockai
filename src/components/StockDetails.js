@@ -28,7 +28,7 @@ export const StockDetails = () => {
     <Container className="stockdetails">
       <Col className="stock_header">
         <Col sm={4} className="stock_about">
-          <Link to={{ pathname: "/" }}>
+          <Link>
             <div className="stock_logo">
               <img src={alc} alt="" />
               <div>

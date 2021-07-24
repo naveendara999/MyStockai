@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
-import logo from "../../Assets/images/Logo.svg";
+import logo from "../../Assets/images/logoStock.jpeg";
 import {
   FaFacebookF,
   FaTwitter,

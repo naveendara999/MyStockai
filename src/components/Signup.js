@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { Row } from "reactstrap";
-import logo from "./../Assets/images/Logo.svg";
+import logo from "./../Assets/images/logoStock.jpeg";
 import { Button, FormGroup, FormText } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import * as AuthActions from "../redux/actions/authActions";

@@ -4,6 +4,7 @@ import { Link, StaticRouter } from "react-router-dom";
 import { Container, Col, Row, Form, FormGroup, Input } from "reactstrap";
 import SectorsCard from "./SectorsCard";
 import * as StockActions from "../../../redux/actions/stockListActions";
+import * as FavStockActions from "../../../redux/actions/favStockActions";
 import { useDispatch, useSelector } from "react-redux";
 function TopPicks() {
   const tableHeader = [
@@ -24,11 +25,13 @@ function TopPicks() {
   ];
 
   const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.authData);
+  const favList = useSelector((state) => state.favStockData.getFavData);
   const stockList = useSelector((state) => state.stockListData.data);
 
   React.useEffect(() => {
     dispatch(StockActions.stockListAction());
+    dispatch(FavStockActions.getFavStockListAction());
   }, []);
 
   const [FavoritesList, setFavoritesList] = useState([]);
@@ -57,7 +60,7 @@ function TopPicks() {
               </tr>
             </thead>
             <tbody>
-              {stockList &&
+              {stockList ? (
                 stockList.map((list, index) => (
                   <tr>
                     <td>
@@ -77,7 +80,14 @@ function TopPicks() {
                     <td>{list.divCash}</td>
                     <td>{list.splitFactor}</td>
                   </tr>
-                ))}
+                ))
+              ) : (
+                <div style={{ display: "flex", width: "100%" }}>
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              )}
             </tbody>
           </Table>
         </Tab>
@@ -119,8 +129,18 @@ function TopPicks() {
               </Table>
             </>
           ) : (
-            <Col lg={12} className="favorites py-5">
-              <p> Look's like you have nothing in your favorites.</p>
+            <Col lg={12} className="favorites">
+              {
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Cras justo odio
+                    <Button class="badge badge-primary badge-pill">14</Button>
+                  </li>
+                </ul>
+              }
+              <p className="py-5">
+                Look's like you have nothing in your favorites.
+              </p>
             </Col>
           )}
         </Tab>
@@ -177,7 +197,7 @@ function TopPicks() {
 
             <Tabs defaultActiveKey="Open Positions" id="PortfolioTabs">
               <Tab eventKey="Open Positions" title="Open Positions">
-                <Col lg={12} className="py-5 open_positions">
+                <Col lg={12} className="open_positions">
                   <p>
                     Look's like you have none. Add them above so we can alert
                     you when its time to sell.
@@ -195,7 +215,7 @@ function TopPicks() {
 
         {/* tab4*/}
 
-        <Tab
+        {/* <Tab
           eventKey="Best picks-based on your style"
           title="Best picks-based on your style"
         >
@@ -205,7 +225,7 @@ function TopPicks() {
               compute this value. You are 1-step away from it.
             </p>
           </Col>
-        </Tab>
+        </Tab> */}
       </Tabs>
 
       {/* //cards */}

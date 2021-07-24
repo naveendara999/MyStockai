@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Row } from "reactstrap";
-import logo from "./../Assets/images/Logo.svg";
+import logo from "./../Assets/images/logoStock.jpeg";
 // import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import validator from "validator";
 import Form from "react-validation/build/form";

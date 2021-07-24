@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import { Button } from "react-bootstrap";
 
-import logo from "../../Assets/images/Logo.svg";
+import logo from "../../Assets/images/logoStock.jpeg";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, Redirect, useHistory } from "react-router-dom";
@@ -64,7 +64,7 @@ export const HomeHeaders = () => {
             >
               <Link to="/toplist"> Home</Link>
             </NavItem>
-            <NavItem
+            {/* <NavItem
               className={window.location.pathname == "/ideas" && "active_nav"}
             >
               <Link to="/ideas"> Ideas</Link>
@@ -75,7 +75,7 @@ export const HomeHeaders = () => {
               }
             >
               <Link to="/transaction">Transactions</Link>
-            </NavItem>
+            </NavItem> */}
           </Nav>
           <Nav className="ml-auto" style={{ width: "100%" }} navbar>
             <div

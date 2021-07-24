@@ -83,12 +83,12 @@ class AreaChartWithEdge extends React.Component {
           height={150}
           origin={(w, h) => [0, h - 150]}
         >
-          <YAxis
+          {/* <YAxis
             axisAt="left"
             orient="left"
             ticks={5}
             tickFormat={format(".2s")}
-          />
+          /> */}
 
           <MouseCoordinateY
             at="left"
