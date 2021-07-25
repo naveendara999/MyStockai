@@ -46,10 +46,10 @@ export const getFavStockListSuccessAction = (data) => {
   };
 };
 
-export const addFavStockListAction = (email, data = {}) => {
+export const addFavStockListAction = (email, stock) => {
   return {
     type: Actions.ADD_FAV_STOCK_LIST_DATA,
-    payload: { email, data },
+    payload: { email, stock },
   };
 };
 export const addFavStockListLoadingAction = () =>
@@ -67,10 +67,10 @@ export const addFavStockListSuccessAction = (data) => {
   };
 };
 
-export const removeFavStockListAction = (email, data = {}) => {
+export const removeFavStockListAction = (email, stock) => {
   return {
     type: Actions.REMOVE_FAV_STOCK_LIST_DATA,
-    payload: { email, data },
+    payload: { email, stock },
   };
 };
 export const removeFavStockListLoadingAction = () =>

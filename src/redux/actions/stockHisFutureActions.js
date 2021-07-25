@@ -26,16 +26,16 @@ export const getStockHistoricalAction = (stock) => {
   };
 };
 export const getStockHistoricalLoadingAction = () =>
-  loadingAction(Actions.GET_STOCK_FUTURE_DATA_LOADING);
+  loadingAction(Actions.GET_STOCK_HISTORICAL_DATA_LOADING);
 export const getStockHistoricalErrorAction = (error) =>
-  errorAction(Actions.GET_STOCK_FUTURE_DATA_ERROR, error);
+  errorAction(Actions.GET_STOCK_HISTORICAL_DATA_ERROR, error);
 export const getStockHistoricalSuccessAction = (data) => {
   const payload = {
     ...data,
     ...successSideEffectState,
   };
   return {
-    type: Actions.GET_STOCK_FUTURE_DATA_SUCCESS,
+    type: Actions.GET_STOCK_HISTORICAL_DATA_SUCCESS,
     payload: payload,
   };
 };

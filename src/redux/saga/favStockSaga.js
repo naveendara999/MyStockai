@@ -8,7 +8,7 @@ function* getFavStockListdata(payload) {
     const data = yield httpPost(
       `https://mystockaibackend.azurewebsites.net/list_favourite`,
       {
-        emailid: payload.email,
+        emailid: `${payload}`,
       }
     );
     console.log("data", data);
@@ -26,8 +26,8 @@ function* addStockInFav(payload) {
     const data = yield httpPost(
       `https://mystockaibackend.azurewebsites.net/add_favourite`,
       {
-        emailid: payload.email,
-        symbol: payload.stockName,
+        emailid: `${payload.email}`,
+        symbol: `${payload.stock}`,
       }
     );
     console.log("data", data);
@@ -45,8 +45,8 @@ function* removeStockInFav(payload) {
     const data = yield httpPost(
       `https://mystockaibackend.azurewebsites.net/remove_favourite`,
       {
-        emailid: payload.email,
-        symbol: payload.stockName,
+        emailid: `${payload.email}`,
+        symbol: `${payload.stock}`,
       }
     );
     console.log("data", data);

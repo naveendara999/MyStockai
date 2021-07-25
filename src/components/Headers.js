@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, NavbarBrand, Nav, Collapse } from "reactstrap";
-import logo from "./../Assets/images/logoStock.jpeg";
+import logo from "./../Assets/images/Logo.svg";
 import { Button } from "../components/Button";
 
 export const Headers = () => {

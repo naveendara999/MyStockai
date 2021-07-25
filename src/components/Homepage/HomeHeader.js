@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import { Button } from "react-bootstrap";
 
-import logo from "../../Assets/images/logoStock.jpeg";
+import logo from "../../Assets/images/Logo.svg";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, Redirect, useHistory } from "react-router-dom";

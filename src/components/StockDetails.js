@@ -9,7 +9,7 @@ import {
   DropdownToggle,
   Row,
 } from "reactstrap";
-
+import * as favStockActions from "../redux/actions/favStockActions";
 import { Container, Tabs, Tab } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import alc from "../Assets/images/alkermes.svg";
@@ -17,13 +17,26 @@ import GaugeChart from "react-gauge-chart";
 import Piegraph from "./Graphs/Piegraph";
 import BottomChart from "./Graphs/BottomChart";
 import PriBottomChart from "./Graphs/PriBottomGraph";
+import { useDispatch, useSelector } from "react-redux";
 
 export const StockDetails = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const { stock = "jg" } = useParams();
-  console.log(stock);
+
+  const UserEmail = localStorage.getItem("UserEmail");
+  const StockName = localStorage.getItem("StockName");
+  const state = useSelector((state) => state);
+  const hisData = useSelector((state) => state.stockHisFutureData.stockHisData);
+  const futureData = useSelector(
+    (state) => state.stockHisFutureData.stockFutureData
+  );
+
+  const dispatch = useDispatch();
+  const addFavHandler = () => {
+    dispatch(favStockActions.addFavStockListAction(UserEmail, StockName));
+  };
+
   return (
     <Container className="stockdetails">
       <Col className="stock_header">
@@ -32,7 +45,7 @@ export const StockDetails = () => {
             <div className="stock_logo">
               <img src={alc} alt="" />
               <div>
-                <h1>Alkermes plc</h1>
+                <h1>{StockName}</h1>
                 <div className="second_line">
                   <span>ALKS</span>
                   <span>
@@ -63,7 +76,9 @@ export const StockDetails = () => {
             <DropdownItem>Interactive Brokers</DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        <Button caret>Add to Favorite List & track everyday</Button>
+        <Button onClick={() => addFavHandler()} caret>
+          Add to Favorite List
+        </Button>
         {/* <Button>Add Notes</Button> */}
       </ButtonGroup>
 

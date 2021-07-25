@@ -21,6 +21,7 @@ import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 import { StockDetails } from "./components/StockDetails";
 import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 
 // ..
 AOS.init({
@@ -45,14 +46,17 @@ AOS.init({
 });
 
 function App() {
+  const [UserValidate, SetUserValidate] = React.useState(false);
+
   const UserAuthenticated = localStorage.getItem("UserAuthenticated");
+  const UserEmail = localStorage.getItem("UserEmail");
 
   // if (UserAuthenticated) {
   //   return <Redirect to="/toplist" />;
   // }
   return (
     <Router>
-      {UserAuthenticated ? <Redirect to="/toplist" /> : ""}
+      {UserValidate ? <Redirect to="/toplist" /> : ""}
       <Switch>
         <Route exact path="/">
           <Header />

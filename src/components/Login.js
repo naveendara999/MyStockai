@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Row } from "reactstrap";
-import logo from "./../Assets/images/logoStock.jpeg";
+import logo from "./../Assets/images/Logo.svg";
 // import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import validator from "validator";
 import Form from "react-validation/build/form";
@@ -58,6 +58,7 @@ const Login = (props) => {
   if (value.isSuccess && value.Login && loading) {
     setLoading(false);
     localStorage.setItem("UserAuthenticated", value.Login);
+    localStorage.setItem("UserEmail", emailid);
     <Redirect to="/toplist" />;
   } else if (value.isSuccess && !value.Login && loading) {
     setLoading(false);

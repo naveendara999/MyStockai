@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Tabs, Tab, Table, Button } from "react-bootstrap";
-import { Link, StaticRouter } from "react-router-dom";
+import { Link, StaticRouter, useHistory } from "react-router-dom";
 import { Container, Col, Row, Form, FormGroup, Input } from "reactstrap";
 import SectorsCard from "./SectorsCard";
 import * as StockActions from "../../../redux/actions/stockListActions";
 import * as FavStockActions from "../../../redux/actions/favStockActions";
+import * as StockHisFutActions from "../../../redux/actions/stockHisFutureActions";
 import { useDispatch, useSelector } from "react-redux";
 function TopPicks() {
   const tableHeader = [
@@ -25,14 +26,30 @@ function TopPicks() {
   ];
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.authData);
+  const history = useHistory();
+  const UserEmail = localStorage.getItem("UserEmail");
+  const state = useSelector((state) => state);
   const favList = useSelector((state) => state.favStockData.getFavData);
   const stockList = useSelector((state) => state.stockListData.data);
 
   React.useEffect(() => {
     dispatch(StockActions.stockListAction());
-    // dispatch(FavStockActions.getFavStockListAction());
   }, []);
+
+  React.useEffect(() => {
+    dispatch(FavStockActions.getFavStockListAction(UserEmail));
+  }, [state.favStockData.putFavData.isSuccess]);
+
+  const getStockDetials = (stock) => {
+    localStorage.setItem("StockName", stock);
+    dispatch(StockHisFutActions.getStockHistoricalAction(stock));
+    dispatch(StockHisFutActions.getStockFutureAction(stock));
+    history.push(`/stockdetails/${stock}`);
+  };
+
+  const removeFavHandler = (stock) => {
+    dispatch(FavStockActions.removeFavStockListAction(UserEmail, stock));
+  };
 
   const [FavoritesList, setFavoritesList] = useState([]);
 
@@ -59,12 +76,13 @@ function TopPicks() {
                 ))}
               </tr>
             </thead>
-            <tbody>
-              {stockList ? (
-                stockList.map((list, index) => (
+
+            {stockList ? (
+              stockList.map((list, index) => (
+                <tbody>
                   <tr>
-                    <td>
-                      <Link to="stockdetails/alks">{list.symbol}</Link>
+                    <td onClick={() => getStockDetials(list.symbol)}>
+                      <Link>{list.symbol}</Link>
                     </td>
                     <td>{list.date}</td>
                     <td>{list.close}</td>
@@ -80,15 +98,15 @@ function TopPicks() {
                     <td>{list.divCash}</td>
                     <td>{list.splitFactor}</td>
                   </tr>
-                ))
-              ) : (
-                <div style={{ display: "flex", width: "100%" }}>
-                  <div class="spinner-border text-primary" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
+                </tbody>
+              ))
+            ) : (
+              <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
                 </div>
-              )}
-            </tbody>
+              </div>
+            )}
           </Table>
         </Tab>
 
@@ -130,17 +148,28 @@ function TopPicks() {
             </>
           ) : (
             <Col lg={12} className="favorites">
-              {
-                <ul class="list-group">
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Cras justo odio
-                    <Button class="badge badge-primary badge-pill">14</Button>
-                  </li>
-                </ul>
-              }
-              <p className="py-5">
-                Look's like you have nothing in your favorites.
-              </p>
+              <ul class="list-group">
+                {favList.Stocks ? (
+                  favList.Stocks.map((item, index) => (
+                    <li
+                      key={index}
+                      class="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      {item}
+                      <Button
+                        class="badge badge-primary badge-pill"
+                        onClick={() => removeFavHandler(item)}
+                      >
+                        Remove
+                      </Button>
+                    </li>
+                  ))
+                ) : (
+                  <p className="py-5">
+                    Look's like you have nothing in your favorites.
+                  </p>
+                )}
+              </ul>
             </Col>
           )}
         </Tab>
@@ -197,7 +226,7 @@ function TopPicks() {
 
             <Tabs defaultActiveKey="Open Positions" id="PortfolioTabs">
               <Tab eventKey="Open Positions" title="Open Positions">
-                <Col lg={12} className="open_positions">
+                <Col lg={12} className="py-5 open_positions">
                   <p>
                     Look's like you have none. Add them above so we can alert
                     you when its time to sell.

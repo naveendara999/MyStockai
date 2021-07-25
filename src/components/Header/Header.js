@@ -8,7 +8,7 @@ import {
   Nav,
   NavLink,
 } from "reactstrap";
-import logo from "../../Assets/images/logoStock.jpeg";
+import logo from "../../Assets/images/Logo.svg";
 import menu from "../../Assets/images/menu.svg";
 import { Button } from "../Button";
 
