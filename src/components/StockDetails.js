@@ -47,7 +47,7 @@ export const StockDetails = () => {
               <div>
                 <h1>{StockName}</h1>
                 <div className="second_line">
-                  <span>ALKS</span>
+                  <span>{StockName}</span>
                   <span>
                     <img src={alc} alt="" /> NASDQ
                   </span>
@@ -57,14 +57,14 @@ export const StockDetails = () => {
           </Link>
         </Col>
       </Col>
-
+      {/* 
       <Row>
         <Col lg={3} style={{ height: "60px" }}>
           <div></div>
         </Col>
         <Col></Col>
         <Col lg={3} style={{ height: "60px" }}></Col>
-      </Row>
+      </Row> */}
 
       <ButtonGroup className="my-3">
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
@@ -99,7 +99,6 @@ export const StockDetails = () => {
               <div
                 style={{
                   backgroundColor: "#fff",
-                  height: "550px",
                 }}
                 className="shadow-lg"
               >
@@ -110,7 +109,7 @@ export const StockDetails = () => {
                       Want to know if this stock suit your investment style ?
                       You are 1-step away from it.
                     </p>
-                    <p className="mb-2 desc">
+                    <p className="mb-4 desc">
                       Click the below button to upload your old transactions
                       from any brokerages.
                     </p>
@@ -124,7 +123,77 @@ export const StockDetails = () => {
                 </div>
               </div>
             </Col>
-            <Col lg={6} className="mt-4 mb-4 ">
+            <Col lg={6} className="mt-4 mb-4">
+              <div
+                style={{
+                  backgroundColor: "#fff",
+                }}
+                className="shadow-lg"
+              >
+                <div className="detail_card p-4">
+                  <div style={{ textAlign: "center" }}>
+                    <div className="title ">
+                      <h4>
+                        Technical Analysis for{" "}
+                        <Link to="#" style={{ textDecoration: "none" }}>
+                          ALKS
+                        </Link>
+                      </h4>
+                    </div>
+                    <div
+                      className="my-4"
+                      style={{
+                        margin: " auto",
+                        display: "grid",
+                        placeItems: "center",
+                      }}
+                    >
+                      <GaugeChart
+                        style={{ width: "50%" }}
+                        nrOfLevels={5}
+                        colors={["rgb(251, 84, 122)", "rgb(95, 22, 215)"]}
+                        percent={0.67}
+                        textColor={"black"}
+                        animate={false}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "2rem",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <span>
+                        <div>
+                          <h4>2</h4>
+                        </div>
+                        <div>
+                          <h5>Sell</h5>
+                        </div>
+                      </span>
+                      <span>
+                        <div>
+                          <h4>8</h4>
+                        </div>
+                        <div>
+                          <h5>Neutral</h5>
+                        </div>
+                      </span>
+                      <span>
+                        <div>
+                          <h4>16</h4>
+                        </div>
+                        <div>
+                          <h5>Buy</h5>
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Col>
+            {/* <Col lg={6} className="mt-4 mb-4 ">
               <div
                 style={{
                   backgroundColor: "#fff",
@@ -260,7 +329,7 @@ export const StockDetails = () => {
                   </Col>
                 </Row>
               </div>
-            </Col>
+            </Col> */}
             {/* <Col lg={6} className="my-2">
               <div
                 style={{
@@ -416,30 +485,38 @@ export const StockDetails = () => {
               </div>
             </Col>*/}
             <Col
-              className="my-4"
+              className="my-4 shadow-lg"
               lg={9}
-              style={{ marginRight: "0", paddingRight: "0" }}
+              style={{
+                marginRight: "0",
+                paddingRight: "0",
+                backgroundColor: "#fff",
+              }}
             >
               <div>Historical Data</div>
               <BottomChart />
             </Col>
             <Col
-              className="my-4"
+              className="my-4 shadow-lg"
               lg={3}
-              style={{ marginLeft: "0", paddingLeft: "0" }}
+              style={{
+                marginLeft: "0",
+                paddingLeft: "0",
+                backgroundColor: "#fff",
+              }}
             >
               <div>Forcast Data</div>
               <PriBottomChart />
             </Col>
           </Row>
         </Tab>
-        <Tab
+        {/* <Tab
           eventKey="Stock Features
 "
           title="Stock Features
 "
           disabled
-        ></Tab>
+        ></Tab> */}
       </Tabs>
     </Container>
   );
