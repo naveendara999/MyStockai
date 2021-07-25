@@ -20,6 +20,8 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { Button as Btn } from "../Button";
+import * as AppActions from "../../redux/actions/appActions";
+import { useDispatch } from "react-redux";
 
 export const HomeHeaders = () => {
   let today = new Date().toLocaleDateString();
@@ -37,10 +39,14 @@ export const HomeHeaders = () => {
   };
 
   const UserAuthenticated = localStorage.getItem("UserAuthenticated");
-
+  const dispatch = useDispatch();
   if (!UserAuthenticated) {
     return <Redirect to="/login" />;
   }
+
+  const searchHandler = (text) => {
+    dispatch(AppActions.searchAction(text));
+  };
 
   return (
     <div className="header">
@@ -87,7 +93,10 @@ export const HomeHeaders = () => {
                 gap: "1rem",
               }}
             >
-              <Input placeholder="Search - Symbol/Company Name" />
+              <Input
+                placeholder="Search - Symbol/Company Name"
+                onChange={(e) => searchHandler(e.target.value)}
+              />
               <FontAwesomeIcon icon={faUserCircle} size="3x" color="gray" />
             </div>
           </Nav>

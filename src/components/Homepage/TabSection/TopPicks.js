@@ -78,28 +78,32 @@ function TopPicks() {
             </thead>
 
             {stockList ? (
-              stockList.map((list, index) => (
-                <tbody>
-                  <tr>
-                    <td onClick={() => getStockDetials(list.symbol)}>
-                      <Link>{list.symbol}</Link>
-                    </td>
-                    <td>{list.date}</td>
-                    <td>{list.close}</td>
-                    <td>{list.high}</td>
-                    <td>{list.low}</td>
-                    <td>{list.open}</td>
-                    <td>{list.volume}</td>
-                    <td>{list.adjClose}</td>
-                    <td>{list.adjHigh}</td>
-                    <td>{list.adjLow}</td>
-                    <td>{list.adjOpen}</td>
-                    <td>{list.adjVolume}</td>
-                    <td>{list.divCash}</td>
-                    <td>{list.splitFactor}</td>
-                  </tr>
-                </tbody>
-              ))
+              stockList
+                .filter((item) =>
+                  item.symbol.includes(state.appData.search.toUpperCase())
+                )
+                .map((list, index) => (
+                  <tbody>
+                    <tr>
+                      <td onClick={() => getStockDetials(list.symbol)}>
+                        <Link>{list.symbol}</Link>
+                      </td>
+                      <td>{list.date}</td>
+                      <td>{list.close}</td>
+                      <td>{list.high}</td>
+                      <td>{list.low}</td>
+                      <td>{list.open}</td>
+                      <td>{list.volume}</td>
+                      <td>{list.adjClose}</td>
+                      <td>{list.adjHigh}</td>
+                      <td>{list.adjLow}</td>
+                      <td>{list.adjOpen}</td>
+                      <td>{list.adjVolume}</td>
+                      <td>{list.divCash}</td>
+                      <td>{list.splitFactor}</td>
+                    </tr>
+                  </tbody>
+                ))
             ) : (
               <div class="d-flex justify-content-center">
                 <div class="spinner-border" role="status">
