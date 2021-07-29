@@ -10,7 +10,7 @@ import {
   Row,
 } from "reactstrap";
 import * as favStockActions from "../redux/actions/favStockActions";
-import { Container, Tabs, Tab } from "react-bootstrap";
+import { Container, Tabs, Tab, Spinner } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import alc from "../Assets/images/alkermes.svg";
 import GaugeChart from "react-gauge-chart";
@@ -21,20 +21,20 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const StockDetails = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const { stock } = useParams();
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   const UserEmail = localStorage.getItem("UserEmail");
-  const StockName = localStorage.getItem("StockName");
   const state = useSelector((state) => state);
-  const hisData = useSelector((state) => state.stockHisFutureData.stockHisData);
-  const futureData = useSelector(
-    (state) => state.stockHisFutureData.stockFutureData
-  );
+  const putdata = useSelector((state) => state.favStockData.putFavData);
+  // const hisData = useSelector((state) => state.stockHisFutureData.stockHisData);
+  // const futureData = useSelector(
+  //   (state) => state.stockHisFutureData.stockFutureData
+  // );
 
   const dispatch = useDispatch();
   const addFavHandler = () => {
-    dispatch(favStockActions.addFavStockListAction(UserEmail, StockName));
+    dispatch(favStockActions.addFavStockListAction(UserEmail, stock));
   };
 
   return (
@@ -45,9 +45,9 @@ export const StockDetails = () => {
             <div className="stock_logo">
               <img src={alc} alt="" />
               <div>
-                <h1>{StockName}</h1>
+                <h1>{stock}</h1>
                 <div className="second_line">
-                  <span>{StockName}</span>
+                  <span>{stock}</span>
                   <span>
                     <img src={alc} alt="" /> NASDQ
                   </span>
@@ -77,7 +77,7 @@ export const StockDetails = () => {
           </DropdownMenu>
         </Dropdown>
         <Button onClick={() => addFavHandler()} caret>
-          Add to Favorite List
+          {putdata.isLoading ? "Loading..." : "Add to Favorite List"}
         </Button>
         {/* <Button>Add Notes</Button> */}
       </ButtonGroup>
@@ -136,7 +136,7 @@ export const StockDetails = () => {
                       <h4>
                         Technical Analysis for{" "}
                         <Link to="#" style={{ textDecoration: "none" }}>
-                          ALKS
+                          {stock}
                         </Link>
                       </h4>
                     </div>

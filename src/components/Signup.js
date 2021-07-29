@@ -239,7 +239,7 @@ const Signup = () => {
                 {loading && (
                   <span className="spinner-border spinner-border-sm"></span>
                 )}
-                <span>Sign up</span>
+                <span>Create Account</span>
               </button>
             </div>
 

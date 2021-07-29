@@ -94,7 +94,7 @@ export const HomeHeaders = () => {
               }}
             >
               <Input
-                placeholder="Search - Symbol/Company Name"
+                placeholder="Search - Stock Symbol Name"
                 onChange={(e) => searchHandler(e.target.value)}
               />
               <FontAwesomeIcon icon={faUserCircle} size="3x" color="gray" />

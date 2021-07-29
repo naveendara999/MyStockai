@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Table, Button } from "react-bootstrap";
+import { Tabs, Tab, Table, Button, Spinner } from "react-bootstrap";
 import { Link, StaticRouter, useHistory } from "react-router-dom";
 import { Container, Col, Row, Form, FormGroup, Input } from "reactstrap";
 import SectorsCard from "./SectorsCard";
@@ -30,7 +30,8 @@ function TopPicks() {
   const UserEmail = localStorage.getItem("UserEmail");
   const state = useSelector((state) => state);
   const favList = useSelector((state) => state.favStockData.getFavData);
-  const stockList = useSelector((state) => state.stockListData.data);
+  const putdata = useSelector((state) => state.favStockData.putFavData);
+  const stockList = useSelector((state) => state.stockListData);
 
   React.useEffect(() => {
     dispatch(StockActions.stockListAction());
@@ -38,7 +39,7 @@ function TopPicks() {
 
   React.useEffect(() => {
     dispatch(FavStockActions.getFavStockListAction(UserEmail));
-  }, [state.favStockData.putFavData.isSuccess]);
+  }, [putdata.isSuccess]);
 
   const getStockDetials = (stock) => {
     localStorage.setItem("StockName", stock);
@@ -77,8 +78,8 @@ function TopPicks() {
               </tr>
             </thead>
 
-            {stockList ? (
-              stockList
+            {stockList.data &&
+              stockList.data
                 .filter((item) =>
                   item.symbol.includes(state.appData.search.toUpperCase())
                 )
@@ -103,84 +104,55 @@ function TopPicks() {
                       <td>{list.splitFactor}</td>
                     </tr>
                   </tbody>
-                ))
-            ) : (
-              <div class="d-flex justify-content-center">
-                <div class="spinner-border" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
-              </div>
-            )}
+                ))}
           </Table>
+          {stockList.isLoading && (
+            <div class="d-flex justify-content-center py-5">
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          )}
         </Tab>
 
         {/* tab2 */}
 
         <Tab eventKey="Favorites" title="Favorite">
-          {FavoritesList && FavoritesList.length > 0 ? (
-            <>
-              <div className="tab_slogen py-3">
-                <ul>
-                  <li>
-                    Top stocks for the day. Click on the symbol to get more
-                    detailed analysis about the stock.
-                  </li>
-                </ul>
-              </div>
-              <Table striped bordered hover responsive>
-                <thead>
-                  <tr>
-                    {tableHeader.map((name) => (
-                      <th>{name}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </>
-          ) : (
-            <Col lg={12} className="favorites">
-              <ul class="list-group">
-                {favList.Stocks ? (
-                  favList.Stocks.map((item, index) => (
-                    <li
-                      key={index}
-                      class="list-group-item d-flex justify-content-between align-items-center"
+          <Col lg={12} className="favorites">
+            <ul class="list-group">
+              {favList.Stocks ? (
+                favList.Stocks.map((item, index) => (
+                  <li
+                    key={index}
+                    class="list-group-item d-flex justify-content-between align-items-center"
+                  >
+                    <Link to={"/stockdetails/" + item}> {item}</Link>
+                    <Button
+                      class="badge badge-primary badge-pill"
+                      onClick={() => removeFavHandler(item)}
                     >
-                      {item}
-                      <Button
-                        class="badge badge-primary badge-pill"
-                        onClick={() => removeFavHandler(item)}
-                      >
-                        Remove
-                      </Button>
-                    </li>
-                  ))
-                ) : (
-                  <p className="py-5">
-                    Look's like you have nothing in your favorites.
-                  </p>
-                )}
-              </ul>
-            </Col>
-          )}
+                      {putdata.isLoading ? "Loading..." : "Remove"}
+                    </Button>
+                  </li>
+                ))
+              ) : favList.isLoading ? (
+                <div class="d-flex justify-content-center py-5">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              ) : (
+                <p className="py-5">
+                  Look's like you have nothing in your favorites.
+                </p>
+              )}
+            </ul>
+          </Col>
         </Tab>
 
         {/* tab3*/}
 
-        <Tab eventKey="My Portfolio" title="My Portfolio">
+        {/* <Tab eventKey="My Portfolio" title="My Portfolio">
           <Col lg={12} className="pt-4 px-3 portfolio">
             <h3>My Portfolio</h3>
 
@@ -244,7 +216,7 @@ function TopPicks() {
               </Tab>
             </Tabs>
           </Col>
-        </Tab>
+        </Tab> */}
 
         {/* tab4*/}
 
