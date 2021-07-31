@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { Tabs, Tab, Table, Button, Spinner } from "react-bootstrap";
 import { Link, StaticRouter, useHistory } from "react-router-dom";
-import { Container, Col, Row, Form, FormGroup, Input } from "reactstrap";
+import {
+  Container,
+  Col,
+  Row,
+  Form,
+  FormGroup,
+  Input,
+  UncontrolledAlert,
+} from "reactstrap";
 import SectorsCard from "./SectorsCard";
 import * as StockActions from "../../../redux/actions/stockListActions";
 import * as FavStockActions from "../../../redux/actions/favStockActions";
@@ -73,18 +81,17 @@ function TopPicks() {
             <thead>
               <tr>
                 {tableHeader.map((name) => (
-                  <th>{name}</th>
+                  <th scope="row">{name}</th>
                 ))}
               </tr>
             </thead>
-
-            {stockList.data &&
-              stockList.data
-                .filter((item) =>
-                  item.symbol.includes(state.appData.search.toUpperCase())
-                )
-                .map((list, index) => (
-                  <tbody>
+            <tbody>
+              {stockList.data &&
+                stockList.data
+                  .filter((item) =>
+                    item.symbol.includes(state.appData.search.toUpperCase())
+                  )
+                  .map((list, index) => (
                     <tr>
                       <td onClick={() => getStockDetials(list.symbol)}>
                         <Link>{list.symbol}</Link>
@@ -103,8 +110,8 @@ function TopPicks() {
                       <td>{list.divCash}</td>
                       <td>{list.splitFactor}</td>
                     </tr>
-                  </tbody>
-                ))}
+                  ))}
+            </tbody>
           </Table>
           {stockList.isLoading && (
             <div class="d-flex justify-content-center py-5">
@@ -120,6 +127,14 @@ function TopPicks() {
         <Tab eventKey="Favorites" title="Favorite">
           <Col lg={12} className="favorites">
             <ul class="list-group">
+              {putdata.isSuccess &&
+              putdata.Message === "Stock removed from favourites" ? (
+                <UncontrolledAlert color="success">
+                  {putdata.Message}
+                </UncontrolledAlert>
+              ) : (
+                ""
+              )}
               {favList.Stocks ? (
                 favList.Stocks.map((item, index) => (
                   <li

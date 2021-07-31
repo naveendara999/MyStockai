@@ -8,6 +8,8 @@ import {
   DropdownMenu,
   DropdownToggle,
   Row,
+  Table,
+  UncontrolledAlert,
 } from "reactstrap";
 import * as favStockActions from "../redux/actions/favStockActions";
 import { Container, Tabs, Tab, Spinner } from "react-bootstrap";
@@ -18,11 +20,16 @@ import Piegraph from "./Graphs/Piegraph";
 import BottomChart from "./Graphs/BottomChart";
 import PriBottomChart from "./Graphs/PriBottomGraph";
 import { useDispatch, useSelector } from "react-redux";
+import AlertComponent from "./alert";
+import RechartData from "./reChart/index";
 
 export const StockDetails = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { stock } = useParams();
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const [visible, setVisible] = useState(true);
+
+  const onDismiss = () => setVisible(false);
 
   const UserEmail = localStorage.getItem("UserEmail");
   const state = useSelector((state) => state);
@@ -81,6 +88,11 @@ export const StockDetails = () => {
         </Button>
         {/* <Button>Add Notes</Button> */}
       </ButtonGroup>
+      {putdata.isSuccess && putdata.Message === "Stock added to favourites" ? (
+        <UncontrolledAlert color="success">{putdata.Message}</UncontrolledAlert>
+      ) : (
+        ""
+      )}
 
       <Tabs
         defaultActiveKey="Analysis
@@ -103,23 +115,37 @@ export const StockDetails = () => {
                 className="shadow-lg"
               >
                 <div className="detail_card p-4">
-                  <div className="title">
-                    <h4 className="mb-4">Investing style</h4>
-                    <p className="mb-2 desc">
-                      Want to know if this stock suit your investment style ?
-                      You are 1-step away from it.
-                    </p>
-                    <p className="mb-4 desc">
-                      Click the below button to upload your old transactions
-                      from any brokerages.
-                    </p>
-                  </div>
+                  <Table striped bordered responsive>
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Prediction </th>
+                      </tr>
+                    </thead>
 
-                  <Link to="/transaction">
-                    <Button color="warning" block className="my-5">
-                      Upload Transactions
-                    </Button>
-                  </Link>
+                    <tbody>
+                      <tr>
+                        <td>26/07/2021</td>
+                        <td>66.6</td>
+                      </tr>
+                      <tr>
+                        <td>27/07/2021</td>
+                        <td>68.6</td>
+                      </tr>
+                      <tr>
+                        <td>28/07/2021</td>
+                        <td>66.6</td>
+                      </tr>
+                      <tr>
+                        <td>29/07/2021</td>
+                        <td>67.6</td>
+                      </tr>
+                      <tr>
+                        <td>30/07/2021</td>
+                        <td>67.2</td>
+                      </tr>
+                    </tbody>
+                  </Table>
                 </div>
               </div>
             </Col>
@@ -150,9 +176,9 @@ export const StockDetails = () => {
                     >
                       <GaugeChart
                         style={{ width: "50%" }}
-                        nrOfLevels={5}
+                        nrOfLevels={3}
                         colors={["rgb(251, 84, 122)", "rgb(95, 22, 215)"]}
-                        percent={0.67}
+                        percent={Math.random()}
                         textColor={"black"}
                         animate={false}
                       />
@@ -486,19 +512,21 @@ export const StockDetails = () => {
             </Col>*/}
             <Col
               className="my-4 shadow-lg"
-              lg={9}
+              lg={12}
               style={{
                 marginRight: "0",
                 paddingRight: "0",
                 backgroundColor: "#fff",
+                height: "500px",
               }}
             >
               <div>Historical Data</div>
-              <BottomChart />
+              {/* <BottomChart /> */}
+              <RechartData />
             </Col>
-            <Col
+            {/* <Col
               className="my-4 shadow-lg"
-              lg={3}
+              lg={4}
               style={{
                 marginLeft: "0",
                 paddingLeft: "0",
@@ -507,7 +535,7 @@ export const StockDetails = () => {
             >
               <div>Forcast Data</div>
               <PriBottomChart />
-            </Col>
+            </Col> */}
           </Row>
         </Tab>
         {/* <Tab
