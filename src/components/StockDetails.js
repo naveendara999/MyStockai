@@ -21,6 +21,7 @@ import BottomChart from "./Graphs/BottomChart";
 import PriBottomChart from "./Graphs/PriBottomGraph";
 import { useDispatch, useSelector } from "react-redux";
 import AlertComponent from "./alert";
+import * as StockHisFutActions from "../redux/actions/stockHisFutureActions";
 import RechartData from "./reChart/index";
 
 export const StockDetails = () => {
@@ -34,7 +35,7 @@ export const StockDetails = () => {
   const UserEmail = localStorage.getItem("UserEmail");
   const state = useSelector((state) => state);
   const putdata = useSelector((state) => state.favStockData.putFavData);
-  // const hisData = useSelector((state) => state.stockHisFutureData.stockHisData);
+  const hisData = useSelector((state) => state.stockHisFutureData.stockHisData);
   // const futureData = useSelector(
   //   (state) => state.stockHisFutureData.stockFutureData
   // );
@@ -43,6 +44,11 @@ export const StockDetails = () => {
   const addFavHandler = () => {
     dispatch(favStockActions.addFavStockListAction(UserEmail, stock));
   };
+
+  React.useEffect(() => {
+    dispatch(StockHisFutActions.getStockHistoricalAction(stock));
+    // dispatch(StockHisFutActions.getStockFutureAction(stock));
+  }, [stock]);
 
   return (
     <Container className="stockdetails">
@@ -74,7 +80,7 @@ export const StockDetails = () => {
       </Row> */}
 
       <ButtonGroup className="my-3">
-        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+        {/* <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <DropdownToggle caret>Buy with your trading platform</DropdownToggle>
           <DropdownMenu>
             <DropdownItem>Schwab</DropdownItem>
@@ -82,7 +88,7 @@ export const StockDetails = () => {
             <DropdownItem>Trade Station</DropdownItem>
             <DropdownItem>Interactive Brokers</DropdownItem>
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown> */}
         <Button onClick={() => addFavHandler()} caret>
           {putdata.isLoading ? "Loading..." : "Add to Favorite List"}
         </Button>
@@ -123,29 +129,29 @@ export const StockDetails = () => {
                       </tr>
                     </thead>
 
-                    <tbody>
-                      <tr>
-                        <td>26/07/2021</td>
-                        <td>66.6</td>
-                      </tr>
-                      <tr>
-                        <td>27/07/2021</td>
-                        <td>68.6</td>
-                      </tr>
-                      <tr>
-                        <td>28/07/2021</td>
-                        <td>66.6</td>
-                      </tr>
-                      <tr>
-                        <td>29/07/2021</td>
-                        <td>67.6</td>
-                      </tr>
-                      <tr>
-                        <td>30/07/2021</td>
-                        <td>67.2</td>
-                      </tr>
-                    </tbody>
+                    {hisData.isSuccess && (
+                      <tbody>
+                        {hisData.data
+                          .reverse()
+                          .slice(0, 5)
+                          .map((item) => {
+                            return (
+                              <tr>
+                                <td>{item.date}</td>
+                                <td>{item.predicted_price}</td>
+                              </tr>
+                            );
+                          })}
+                      </tbody>
+                    )}
                   </Table>
+                  {hisData.isLoading && (
+                    <div class="d-flex justify-content-center py-5">
+                      <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </Col>
@@ -177,7 +183,11 @@ export const StockDetails = () => {
                       <GaugeChart
                         style={{ width: "50%" }}
                         nrOfLevels={3}
-                        colors={["rgb(251, 84, 122)", "rgb(95, 22, 215)"]}
+                        colors={[
+                          "rgb(242, 40, 36)",
+                          "rgb(233, 245, 15)",
+                          "rgb(106, 242, 15)",
+                        ]}
                         percent={Math.random()}
                         textColor={"black"}
                         animate={false}
@@ -192,24 +202,15 @@ export const StockDetails = () => {
                     >
                       <span>
                         <div>
-                          <h4>2</h4>
-                        </div>
-                        <div>
                           <h5>Sell</h5>
                         </div>
                       </span>
                       <span>
                         <div>
-                          <h4>8</h4>
-                        </div>
-                        <div>
                           <h5>Neutral</h5>
                         </div>
                       </span>
                       <span>
-                        <div>
-                          <h4>16</h4>
-                        </div>
                         <div>
                           <h5>Buy</h5>
                         </div>
@@ -522,7 +523,15 @@ export const StockDetails = () => {
             >
               <div>Historical Data</div>
               {/* <BottomChart /> */}
-              <RechartData />
+              {hisData.isSuccess ? (
+                <RechartData data={hisData.data.reverse()} />
+              ) : (
+                <div class="d-flex justify-content-center py-5">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              )}
             </Col>
             {/* <Col
               className="my-4 shadow-lg"

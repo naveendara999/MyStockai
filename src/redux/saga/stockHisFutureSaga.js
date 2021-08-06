@@ -6,7 +6,7 @@ function* getStockHistorical(payload) {
   try {
     yield put(actionCreators.getStockHistoricalLoadingAction());
     const data = yield httpPost(
-      `https://mystockaibackend.azurewebsites.net/historical_data`,
+      `https://mystockaibackend.azurewebsites.net/stock_data`,
       {
         symbol: payload,
       }

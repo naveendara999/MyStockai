@@ -31,8 +31,8 @@ export const getStockHistoricalErrorAction = (error) =>
   errorAction(Actions.GET_STOCK_HISTORICAL_DATA_ERROR, error);
 export const getStockHistoricalSuccessAction = (data) => {
   const payload = {
-    ...data,
     ...successSideEffectState,
+    data: data,
   };
   return {
     type: Actions.GET_STOCK_HISTORICAL_DATA_SUCCESS,

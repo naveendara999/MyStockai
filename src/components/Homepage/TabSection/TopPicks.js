@@ -50,9 +50,8 @@ function TopPicks() {
   }, [putdata.isSuccess]);
 
   const getStockDetials = (stock) => {
-    localStorage.setItem("StockName", stock);
-    dispatch(StockHisFutActions.getStockHistoricalAction(stock));
-    dispatch(StockHisFutActions.getStockFutureAction(stock));
+    // dispatch(StockHisFutActions.getStockHistoricalAction(stock));
+    // dispatch(StockHisFutActions.getStockFutureAction(stock));
     history.push(`/stockdetails/${stock}`);
   };
 
