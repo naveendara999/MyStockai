@@ -22,9 +22,11 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 import { Button as Btn } from "../Button";
 import * as AppActions from "../../redux/actions/appActions";
 import { useDispatch } from "react-redux";
+import moment from "moment-timezone";
 
 export const HomeHeaders = () => {
-  let today = new Date().toLocaleDateString();
+  let today = new moment.tz("America/New_York").format("DD/MM/YYYY");
+  // let today = new Date().toLocaleDateString();
   const [collapsed, setCollapsed] = useState(true);
   const history = useHistory();
   const toggleNavbar = () => setCollapsed(!collapsed);

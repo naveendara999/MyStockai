@@ -33,6 +33,8 @@ function TopPicks() {
     "splitFactor",
   ];
 
+  const [Loading, setLoading] = React.useState("");
+
   const dispatch = useDispatch();
   const history = useHistory();
   const UserEmail = localStorage.getItem("UserEmail");
@@ -50,23 +52,17 @@ function TopPicks() {
   }, [putdata.isSuccess]);
 
   const getStockDetials = (stock) => {
-    // dispatch(StockHisFutActions.getStockHistoricalAction(stock));
-    // dispatch(StockHisFutActions.getStockFutureAction(stock));
     history.push(`/stockdetails/${stock}`);
   };
 
   const removeFavHandler = (stock) => {
+    setLoading(stock);
     dispatch(FavStockActions.removeFavStockListAction(UserEmail, stock));
   };
 
-  const [FavoritesList, setFavoritesList] = useState([]);
-
-  console.log(setFavoritesList);
   return (
     <Container style={{ marginTop: "160px" }} className="toppicks">
       <Tabs defaultActiveKey="Top picks in uptrend" id="StocklistTab">
-        {/* tab1 */}
-
         <Tab eventKey="Top picks in uptrend" title="Top picks in uptrend">
           <div className="tab_slogen py-3">
             <ul>
@@ -145,7 +141,9 @@ function TopPicks() {
                       class="badge badge-primary badge-pill"
                       onClick={() => removeFavHandler(item)}
                     >
-                      {putdata.isLoading ? "Loading..." : "Remove"}
+                      {putdata.isLoading && item === Loading
+                        ? "Loading..."
+                        : "Remove"}
                     </Button>
                   </li>
                 ))
@@ -163,91 +161,7 @@ function TopPicks() {
             </ul>
           </Col>
         </Tab>
-
-        {/* tab3*/}
-
-        {/* <Tab eventKey="My Portfolio" title="My Portfolio">
-          <Col lg={12} className="pt-4 px-3 portfolio">
-            <h3>My Portfolio</h3>
-
-            <p className="mb-3">
-              Add new open positions so we can track and alert you when the it
-              hits the <strong>stop-loss or the trend changes .</strong>
-            </p>
-
-            <Form className="needs-validation p-3 bg-light mt-1 ">
-              <Row>
-                <Col md={3} sm={6}>
-                  <FormGroup>
-                    <Input
-                      type="email"
-                      name="email"
-                      id="exampleEmail"
-                      placeholder="with a placeholder"
-                    />
-                  </FormGroup>
-                </Col>
-
-                <Col md={3} sm={6}>
-                  <FormGroup>
-                    <Input
-                      type="email"
-                      name="email"
-                      id="exampleEmail"
-                      placeholder="with a placeholder"
-                    />
-                  </FormGroup>
-                </Col>
-                <Col md={3} sm={6}>
-                  <FormGroup>
-                    <Input
-                      type="email"
-                      name="email"
-                      id="exampleEmail"
-                      placeholder="with a placeholder"
-                    />
-                  </FormGroup>
-                </Col>
-                <Col md={3} sm={6}>
-                  <Button style={{ width: "100%" }}>Submit</Button>
-                </Col>
-              </Row>
-            </Form>
-
-            <Tabs defaultActiveKey="Open Positions" id="PortfolioTabs">
-              <Tab eventKey="Open Positions" title="Open Positions">
-                <Col lg={12} className="py-5 open_positions">
-                  <p>
-                    Look's like you have none. Add them above so we can alert
-                    you when its time to sell.
-                  </p>
-                </Col>
-              </Tab>
-              <Tab eventKey=" Closed Positions" title=" Closed Positions">
-                <Col lg={12} className="py-5 open_positions">
-                  <p>Look's like you have none so far.</p>
-                </Col>
-              </Tab>
-            </Tabs>
-          </Col>
-        </Tab> */}
-
-        {/* tab4*/}
-
-        {/* <Tab
-          eventKey="Best picks-based on your style"
-          title="Best picks-based on your style"
-        >
-          <Col lg={12} className="py-5 open_positions">
-            <p>
-              <Link to="/toplist"> Upload transactions</Link> {""}so we can
-              compute this value. You are 1-step away from it.
-            </p>
-          </Col>
-        </Tab> */}
       </Tabs>
-
-      {/* //cards */}
 
       <Col lg={12} className="pt-4 mb-5">
         <h2>Uptrend by Sectors</h2>

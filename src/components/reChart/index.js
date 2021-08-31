@@ -128,6 +128,14 @@ import {
 
 const RechartData = (props) => {
   const data = props.data;
+  console.log("length", data.length);
+  console.log("15_length", data.length - 15);
+
+  const [Index, setIndex] = React.useState({
+    startIndex: data.length - 15,
+    endIndex: data.length,
+  });
+  console.log("iNDEX", Index);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <ComposedChart
@@ -137,24 +145,49 @@ const RechartData = (props) => {
         margin={{
           top: 20,
           right: 20,
-          bottom: 20,
+          bottom: 50,
           left: 20,
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis dataKey="date" scale="band" />
-        <YAxis dataKey="high" />
-        <Tooltip />
-        <Legend verticalAlign="top" wrapperStyle={{ lineHeight: "10px" }} />
+        <YAxis />
+        <Tooltip filterNull={true} active={true} />
+        <Legend
+          verticalAlign="top"
+          wrapperStyle={{ lineHeight: "10px", paddingBottom: "10px" }}
+        />
         <ReferenceLine y={0} stroke="#000" />
-        <Brush dataKey="date" markerWidth={50} height={30} stroke="#8884d8" />
+        <Brush
+          // tickFormatter={() => alert("Hello")}
+          startIndex={Index.startIndex}
+          // endIndex={Index.endIndex}
+          onChange={(e) => {
+            setIndex({
+              ...Index,
+              startIndex: e.startIndex,
+              endIndex: e.endIndex,
+            });
+          }}
+          dataKey="date"
+          height={30}
+          stroke="#8884d8"
+        />
         <Area
           type="monotone"
           dataKey="predicted_price"
           fill="#8884d8"
           stroke="#8884d8"
+          tooltipType="none"
+          legendType="none"
         />
-        <Bar dataKey="open" barSize={30} fill="#413ea0" />
+        <Bar
+          dataKey="open"
+          tooltipType="none"
+          legendType="none"
+          barSize={30}
+          fill="#413ea0"
+        />
         <Line type="monotone" dataKey="open" stroke="#ff7300" />
         <Line type="monotone" dataKey="predicted_price" stroke="#0fa300" />
       </ComposedChart>

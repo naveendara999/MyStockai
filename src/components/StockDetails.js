@@ -30,6 +30,9 @@ export const StockDetails = () => {
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const [visible, setVisible] = useState(true);
 
+  const [user, setuser] = React.useState("");
+  const [color, setcolor] = React.useState("");
+
   const onDismiss = () => setVisible(false);
 
   const UserEmail = localStorage.getItem("UserEmail");
@@ -45,7 +48,33 @@ export const StockDetails = () => {
     dispatch(favStockActions.addFavStockListAction(UserEmail, stock));
   };
 
+  var getInitials = function (string) {
+    var names = string.split(" "),
+      initials = names[0].substring(0, 1).toUpperCase();
+
+    if (names.length > 1) {
+      initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    }
+    return setuser(initials);
+  };
+
+  function colorize(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let colour = "#";
+    for (let i = 0; i < 3; i++) {
+      let value = (hash >> (i * 8)) & 0xff;
+      colour += ("00" + value.toString(16)).substr(-2);
+    }
+
+    return setcolor(colour);
+  }
+
   React.useEffect(() => {
+    getInitials(stock);
+    colorize(stock);
     dispatch(StockHisFutActions.getStockHistoricalAction(stock));
     // dispatch(StockHisFutActions.getStockFutureAction(stock));
   }, [stock]);
@@ -56,67 +85,58 @@ export const StockDetails = () => {
         <Col sm={4} className="stock_about">
           <Link>
             <div className="stock_logo">
-              <img src={alc} alt="" />
-              <div>
+              {/* <img src={alc} alt="" /> */}
+              <div
+                style={{
+                  backgroundColor: `${color}`,
+                  color: "#fff",
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "50%",
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "32px",
+                  fontWeight: "bold",
+                }}
+              >
+                {user}
+              </div>
+              <div style={{ paddingLeft: "12px" }}>
                 <h1>{stock}</h1>
                 <div className="second_line">
                   <span>{stock}</span>
-                  <span>
+                  {/* <span>
                     <img src={alc} alt="" /> NASDQ
-                  </span>
+                  </span> */}
                 </div>
               </div>
             </div>
           </Link>
         </Col>
       </Col>
-      {/* 
-      <Row>
-        <Col lg={3} style={{ height: "60px" }}>
-          <div></div>
-        </Col>
-        <Col></Col>
-        <Col lg={3} style={{ height: "60px" }}></Col>
-      </Row> */}
 
       <ButtonGroup className="my-3">
-        {/* <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-          <DropdownToggle caret>Buy with your trading platform</DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem>Schwab</DropdownItem>
-            <DropdownItem>E-Trade</DropdownItem>
-            <DropdownItem>Trade Station</DropdownItem>
-            <DropdownItem>Interactive Brokers</DropdownItem>
-          </DropdownMenu>
-        </Dropdown> */}
         <Button onClick={() => addFavHandler()} caret>
           {putdata.isLoading ? "Loading..." : "Add to Favorite List"}
         </Button>
-        {/* <Button>Add Notes</Button> */}
       </ButtonGroup>
       {putdata.isSuccess && putdata.Message === "Stock added to favourites" ? (
         <UncontrolledAlert color="success">{putdata.Message}</UncontrolledAlert>
+      ) : putdata.isSuccess &&
+        putdata.Message === "Stock already added to favourites" ? (
+        <UncontrolledAlert color="danger">{putdata.Message}</UncontrolledAlert>
       ) : (
         ""
       )}
 
-      <Tabs
-        defaultActiveKey="Analysis
-"
-        id="Analysis
-"
-      >
-        <Tab
-          eventKey="Analysis
-"
-          title="Analysis
-"
-        >
+      <Tabs defaultActiveKey="Analysis" id="Analysis">
+        <Tab eventKey="Analysis" title="Analysis">
           <Row>
             <Col lg={6} className="mt-4 mb-4">
               <div
                 style={{
                   backgroundColor: "#fff",
+                  minHeight: "310px",
                 }}
                 className="shadow-lg"
               >
@@ -134,6 +154,7 @@ export const StockDetails = () => {
                         {hisData.data
                           .reverse()
                           .slice(0, 5)
+                          .reverse()
                           .map((item) => {
                             return (
                               <tr>
@@ -159,6 +180,7 @@ export const StockDetails = () => {
               <div
                 style={{
                   backgroundColor: "#fff",
+                  minHeight: "310px",
                 }}
                 className="shadow-lg"
               >
@@ -174,11 +196,8 @@ export const StockDetails = () => {
                     </div>
                     <div
                       className="my-4"
-                      style={{
-                        margin: " auto",
-                        display: "grid",
-                        placeItems: "center",
-                      }}
+                      style={{ display: "flex", justifyContent: "center" }}
+                      textAlign="center"
                     >
                       <GaugeChart
                         style={{ width: "50%" }}
@@ -188,9 +207,10 @@ export const StockDetails = () => {
                           "rgb(233, 245, 15)",
                           "rgb(106, 242, 15)",
                         ]}
+                        hideText
                         percent={Math.random()}
                         textColor={"black"}
-                        animate={false}
+                        animate={true}
                       />
                     </div>
                     <div
@@ -220,297 +240,6 @@ export const StockDetails = () => {
                 </div>
               </div>
             </Col>
-            {/* <Col lg={6} className="mt-4 mb-4 ">
-              <div
-                style={{
-                  backgroundColor: "#fff",
-                  height: "550px",
-                }}
-                className="shadow-lg"
-              >
-                <div className="detail_card p-4">
-                  <div className="title" style={{ margin: "auto" }}>
-                    <h4 className="mb-4">Analyst Analysis</h4>
-                    <Piegraph />
-                  </div>
-                </div>
-                <Row className="mb-5">
-                  <Col lg={6}>
-                    <div
-                      className="p-2"
-                      style={{
-                        display: "flex",
-                        backgroundColor: "#f8f9fa",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span style={{ fontSize: "16px", fontWeight: "400px" }}>
-                        Buy
-                      </span>
-                      <span
-                        className="badge badge-primary badge-pill"
-                        style={{
-                          fontSize: "12px",
-                          backgroundColor: "#0073dd",
-                        }}
-                      >
-                        7
-                      </span>
-                    </div>
-                  </Col>
-                  <Col lg={6}>
-                    <div
-                      className="p-2"
-                      style={{
-                        display: "flex",
-                        backgroundColor: "#f8f9fa",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span style={{ fontSize: "16px", fontWeight: "400px" }}>
-                        Overweight
-                      </span>
-                      <span
-                        className="badge badge-primary badge-pill"
-                        style={{
-                          fontSize: "12px",
-
-                          backgroundColor: "#0073dd",
-                        }}
-                      >
-                        10
-                      </span>
-                    </div>
-                  </Col>
-                  <Col lg={6}>
-                    <div
-                      className="p-2"
-                      style={{
-                        display: "flex",
-                        backgroundColor: "#f8f9fa",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span style={{ fontSize: "16px", fontWeight: "400px" }}>
-                        Hold
-                      </span>
-                      <span
-                        className="badge badge-primary badge-pill"
-                        style={{
-                          fontSize: "12px",
-
-                          backgroundColor: "#0073dd",
-                        }}
-                      >
-                        8
-                      </span>
-                    </div>
-                  </Col>
-                  <Col lg={6}>
-                    <div
-                      className="p-2"
-                      style={{
-                        display: "flex",
-                        backgroundColor: "#f8f9fa",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span style={{ fontSize: "16px", fontWeight: "400px" }}>
-                        Underweight
-                      </span>
-                      <span
-                        className="badge badge-primary badge-pill"
-                        style={{
-                          fontSize: "12px",
-
-                          backgroundColor: "#0073dd",
-                        }}
-                      >
-                        0
-                      </span>
-                    </div>
-                  </Col>
-                  <Col lg={6}>
-                    <div
-                      className="p-2"
-                      style={{
-                        display: "flex",
-                        backgroundColor: "#f8f9fa",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span style={{ fontSize: "16px", fontWeight: "400px" }}>
-                        sell
-                      </span>
-                      <span
-                        className="badge badge-primary badge-pill"
-                        style={{
-                          fontSize: "12px",
-
-                          backgroundColor: "#0073dd",
-                        }}
-                      >
-                        0
-                      </span>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </Col> */}
-            {/* <Col lg={6} className="my-2">
-              <div
-                style={{
-                  backgroundColor: "#fff",
-                  margin: "auto",
-                  height: "500px",
-                }}
-                className="shadow-lg"
-              >
-                <div className="detail_card p-4">
-                  <div className="title">
-                    <h4>Social Sentiment</h4>
-                    <div
-                      className="my-4"
-                      style={{
-                        display: "grid",
-                        placeItems: "center",
-                        margin: " auto",
-                      }}
-                    >
-                      <GaugeChart
-                        style={{ width: "50%", height: "200px" }}
-                        nrOfLevels={2}
-                        colors={["rgb(251, 84, 122)", "rgb(95, 22, 215)"]}
-                        percent={0.95}
-                        textColor={"black"}
-                        animate={false}
-                      />
-                    </div>
-                  </div>
-                  <Row className="my-4">
-                    <Col lg={12} className="mb-2">
-                      <div
-                        className="p-2"
-                        style={{
-                          display: "flex",
-                          backgroundColor: "#f8f9fa",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <span style={{ fontSize: "16px", fontWeight: "400px" }}>
-                          Positive
-                        </span>
-                        <span
-                          className="badge badge-primary badge-pill"
-                          style={{
-                            fontSize: "12px",
-
-                            backgroundColor: "#0073dd",
-                          }}
-                        >
-                          100 %
-                        </span>
-                      </div>
-                    </Col>
-                    <Col lg={12}>
-                      <div
-                        className="p-2"
-                        style={{
-                          display: "flex",
-                          backgroundColor: "#f8f9fa",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <span style={{ fontSize: "16px", fontWeight: "400px" }}>
-                          Negative
-                        </span>
-                        <span
-                          className="badge badge-primary badge-pill"
-                          style={{
-                            fontSize: "12px",
-
-                            backgroundColor: "#0073dd",
-                          }}
-                        >
-                          0%
-                        </span>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-            </Col>
-            <Col lg={6} className="my-2 ">
-              <div
-                style={{
-                  backgroundColor: "#fff",
-                  height: "500px",
-                }}
-                className="shadow-lg"
-              >
-                <div className="detail_card p-4">
-                  <div style={{ textAlign: "center" }}>
-                    <div className="title ">
-                      <h4>
-                        Technical Analysis for{" "}
-                        <Link to="#" style={{ textDecoration: "none" }}>
-                          ALKS
-                        </Link>
-                      </h4>
-                    </div>
-                    <div
-                      className="my-4"
-                      style={{
-                        margin: " auto",
-                        display: "grid",
-                        placeItems: "center",
-                      }}
-                    >
-                      <GaugeChart
-                        style={{ width: "50%" }}
-                        nrOfLevels={5}
-                        colors={["rgb(251, 84, 122)", "rgb(95, 22, 215)"]}
-                        percent={0.67}
-                        textColor={"black"}
-                        animate={false}
-                      />
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: "2rem",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <span>
-                        <div>
-                          <h4>2</h4>
-                        </div>
-                        <div>
-                          <h5>Sell</h5>
-                        </div>
-                      </span>
-                      <span>
-                        <div>
-                          <h4>8</h4>
-                        </div>
-                        <div>
-                          <h5>Neutral</h5>
-                        </div>
-                      </span>
-                      <span>
-                        <div>
-                          <h4>16</h4>
-                        </div>
-                        <div>
-                          <h5>Buy</h5>
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Col>*/}
             <Col
               className="my-4 shadow-lg"
               lg={12}
@@ -518,11 +247,12 @@ export const StockDetails = () => {
                 marginRight: "0",
                 paddingRight: "0",
                 backgroundColor: "#fff",
-                height: "500px",
+                maxHeight: "600px",
               }}
             >
-              <div>Historical Data</div>
-              {/* <BottomChart /> */}
+              <div style={{ padding: "5px", fontWeight: "bold" }}>
+                Forecasted Data
+              </div>
               {hisData.isSuccess ? (
                 <RechartData data={hisData.data.reverse()} />
               ) : (
@@ -533,27 +263,8 @@ export const StockDetails = () => {
                 </div>
               )}
             </Col>
-            {/* <Col
-              className="my-4 shadow-lg"
-              lg={4}
-              style={{
-                marginLeft: "0",
-                paddingLeft: "0",
-                backgroundColor: "#fff",
-              }}
-            >
-              <div>Forcast Data</div>
-              <PriBottomChart />
-            </Col> */}
           </Row>
         </Tab>
-        {/* <Tab
-          eventKey="Stock Features
-"
-          title="Stock Features
-"
-          disabled
-        ></Tab> */}
       </Tabs>
     </Container>
   );
