@@ -11,7 +11,10 @@ function* getStockHistorical(payload) {
         symbol: payload,
       }
     );
-    console.log("data", data);
+    data.forEach(arr => {
+      arr.predicted_price == 'NULL' ? arr.predicted_price = null : arr.predicted_price = arr.predicted_price.toFixed(2);
+      arr.open == 'NULL' ? arr.open = null : arr.open = arr.open.toFixed(2);
+    });
     yield put(actionCreators.getStockHistoricalSuccessAction(data));
   } catch (error) {
     yield put(
@@ -29,7 +32,7 @@ function* getStockFuture(payload) {
         symbol: payload,
       }
     );
-    console.log("data", data);
+    console.log("data===>> future Data", payload, data);
     yield put(actionCreators.getStockFutureSuccessAction(data));
   } catch (error) {
     yield put(
