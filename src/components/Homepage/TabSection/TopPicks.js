@@ -14,6 +14,7 @@ import SectorsCard from "./SectorsCard";
 import * as StockActions from "../../../redux/actions/stockListActions";
 import * as FavStockActions from "../../../redux/actions/favStockActions";
 import * as StockHisFutActions from "../../../redux/actions/stockHisFutureActions";
+import * as AppActions from "../../../redux/actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
 function TopPicks() {
   const tableHeader = [
@@ -45,6 +46,7 @@ function TopPicks() {
 
   React.useEffect(() => {
     dispatch(StockActions.stockListAction());
+    dispatch(AppActions.clearReducerAction());
   }, []);
 
   React.useEffect(() => {
@@ -83,6 +85,7 @@ function TopPicks() {
             <tbody>
               {stockList.data &&
                 stockList.data
+                  .slice(0, 5)
                   .filter((item) =>
                     item.symbol.includes(state.appData.search.toUpperCase())
                   )
@@ -108,6 +111,11 @@ function TopPicks() {
                   ))}
             </tbody>
           </Table>
+          {!stockList.isLoading && (
+            <div class="d-flex justify-content-end">
+              <Button>See More</Button>
+            </div>
+          )}
           {stockList.isLoading && (
             <div class="d-flex justify-content-center py-5">
               <div class="spinner-border" role="status">
@@ -130,7 +138,7 @@ function TopPicks() {
               ) : (
                 ""
               )}
-              {favList.Stocks ? (
+              {favList.Stocks && favList.isSuccess ? (
                 favList.Stocks.map((item, index) => (
                   <li
                     key={index}
@@ -163,7 +171,7 @@ function TopPicks() {
         </Tab>
       </Tabs>
 
-      <Col lg={12} className="pt-4 mb-5">
+      {/* <Col lg={12} className="pt-4 mb-5">
         <h2>Uptrend by Sectors</h2>
         <p className="mb-3">
           All the sectors in the market and number of stocks uptrending in each
@@ -255,7 +263,7 @@ function TopPicks() {
             buttonText="Go somewhere"
           />
         </Row>
-      </Col>
+      </Col> */}
     </Container>
   );
 }

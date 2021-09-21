@@ -1,5 +1,10 @@
 import { all } from "redux-saga/effects";
-import { watchLogin, watchSignUp } from "./authSaga";
+import {
+  watchEmailVerification,
+  watchLogin,
+  watchPasswordReset,
+  watchSignUp,
+} from "./authSaga";
 import {
   watchAddFavStock,
   watchGetFavStockList,
@@ -12,6 +17,8 @@ function* rootSaga() {
   yield all([
     watchLogin(),
     watchSignUp(),
+    watchPasswordReset(),
+    watchEmailVerification(),
     watchgetStockList(),
     watchGetFavStockList(),
     watchAddFavStock(),

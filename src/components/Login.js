@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Row } from "reactstrap";
-import logo from "./../Assets/images/Logo.svg";
+import logo from "./../Assets/images/colorLogo.png";
 // import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import validator from "validator";
 import Form from "react-validation/build/form";
@@ -152,6 +152,16 @@ const Login = (props) => {
                 </div>
               ))}
           </Form>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              padding: "5px",
+            }}
+          >
+            <Link to={"/reset_password"}>Forgot password?</Link>
+          </div>
           <p className="agreeto">
             <Link to="https://www.liste.ai/terms.html" target="_blank">
               Terms
@@ -183,65 +193,6 @@ const Login = (props) => {
               .
             </span>
           </div>
-
-          {/* <Form>
-            <FormGroup className='mt-3 '>
-              <Input
-                type="email"
-                name="email"
-                id="exampleEmail"
-                placeholder="Email address"
-              />
-            </FormGroup>
-            <FormGroup className="mt-3">
-              <Input
-                type='password_'
-                name='password_'
-                id='examplePassword_'
-                placeholder='Password_ '
-              />
-            </FormGroup>
-            <FormGroup check className="mt-3">
-              <Label check>
-                <Input type="checkbox" />
-                Remember me
-              </Label>
-            </FormGroup>
-          </Form> */}
-          {/* <Button className='mt-3' color='primary' size='lg'>
-            Submit
-          </Button>
-          <p className='agreeto'>
-            <Link to='https://www.liste.ai/terms.html' target='_blank'>
-              Terms
-            </Link>
-            By clicking Sign In, you agree to our and have read and acknowledge
-            our
-            <Link to="https://www.MyStock.ai/privacy.html" target="_blank">
-              US Privacy Statement
-            </Link>
-            .
-          </p>
-          <hr />
-          <div className="capcha">
-            <span>
-              Invisible reCAPTCHA by Google
-              <Link
-                to="https://www.google.com/intl/en/policies/privacy/"
-                target="_blank"
-              >
-                Privacy Policy
-              </Link>
-              and
-              <Link
-                to="https://www.google.com/intl/en/policies/terms/"
-                target="_blank"
-              >
-                Terms of Use
-              </Link>
-              .
-            </span>
-          </div> */}
         </div>
       </Row>
     </div>

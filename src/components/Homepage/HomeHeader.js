@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import { Button } from "react-bootstrap";
 
-import logo from "../../Assets/images/Logo.svg";
+import logo from "../../Assets/images/colorLogo.png";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, Redirect, useHistory } from "react-router-dom";
@@ -25,7 +25,7 @@ import { useDispatch } from "react-redux";
 import moment from "moment-timezone";
 
 export const HomeHeaders = () => {
-  let today = new moment.tz("America/New_York").format("DD/MM/YYYY");
+  let today = new moment.tz("America/New_York").format("MM/DD/YYYY");
   // let today = new Date().toLocaleDateString();
   const [collapsed, setCollapsed] = useState(true);
   const history = useHistory();

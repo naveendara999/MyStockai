@@ -22,6 +22,7 @@ import "aos/dist/aos.css"; // You can also use <link> for styles
 import { StockDetails } from "./components/StockDetails";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
+import ResetPassword from "./components/ResetPassword";
 
 // ..
 AOS.init({
@@ -75,6 +76,9 @@ function App() {
       </Route>
       {/* <HomeHeaders /> */}
       {/* <Switch> */}
+      <Route path="/reset_password">
+        <ResetPassword />
+      </Route>
       <Route path="/toplist">
         <HomeHeaders />
         <TopPicks />

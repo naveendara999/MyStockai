@@ -1,4 +1,5 @@
 import { Actions } from "./../actions/favStockActions";
+import * as appActions from "./../actions/appActions";
 import { combineReducers } from "redux";
 
 const initialFavStockListState = {};
@@ -12,6 +13,7 @@ export function getFavStockReducer(state = initialFavStockListState, action) {
         ...state,
         ...action.payload,
       };
+
     default:
       return state;
   }
@@ -29,6 +31,10 @@ export function putFavStockReducer(state = initialPutFavStockState, action) {
     case Actions.REMOVE_FAV_STOCK_LIST_DATA_SUCCESS:
       return {
         ...state,
+        ...action.payload,
+      };
+    case appActions.Actions.CLEAR_REDUCER:
+      return {
         ...action.payload,
       };
     default:

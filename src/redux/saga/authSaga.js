@@ -15,7 +15,7 @@ function* onLogindata(payload) {
     console.log("data", data);
     yield put(actionCreators.loginSuccessAction(data));
   } catch (error) {
-    yield put(actionCreators.loginErrorAction(error.response.data.error));
+    yield put(actionCreators.loginErrorAction(error));
   }
 }
 
@@ -39,7 +39,41 @@ function* onSignUpdata(payload) {
     console.log("data", data);
     yield put(actionCreators.signupSuccessAction(data));
   } catch (error) {
-    yield put(actionCreators.signupErrorAction(error.response.data.error));
+    yield put(actionCreators.signupErrorAction(error));
+  }
+}
+
+function* onPasswordResetdata(payload) {
+  try {
+    yield put(actionCreators.passwordResetLoadingAction());
+    const data = yield httpPost(
+      `https://mystockaibackend.azurewebsites.net/update_password`,
+      {
+        tomailid: payload.data.email,
+        reset_password: payload.data.pass,
+        new_password: payload.data.confirmPass,
+      }
+    );
+    console.log("data", data);
+    yield put(actionCreators.passwordResetSuccessAction(data));
+  } catch (error) {
+    yield put(actionCreators.passwordResetErrorAction(error));
+  }
+}
+
+function* onEmailVerificationdata(payload) {
+  try {
+    yield put(actionCreators.emailVerificationLoadingAction());
+    const data = yield httpPost(
+      `https://mystockaibackend.azurewebsites.net/reset_password`,
+      {
+        tomailid: payload.email,
+      }
+    );
+    console.log("data", data);
+    yield put(actionCreators.emailVerificationSuccessAction(data));
+  } catch (error) {
+    yield put(actionCreators.emailVerificationErrorAction(error));
   }
 }
 
@@ -54,5 +88,21 @@ export function* watchSignUp() {
   while (true) {
     const { payload } = yield take(actionCreators.Actions.SIGNUP_DATA);
     yield call(onSignUpdata, payload);
+  }
+}
+
+export function* watchPasswordReset() {
+  while (true) {
+    const { payload } = yield take(actionCreators.Actions.PASSWORD_RESET_DATA);
+    yield call(onPasswordResetdata, payload);
+  }
+}
+
+export function* watchEmailVerification() {
+  while (true) {
+    const { payload } = yield take(
+      actionCreators.Actions.EMAIL_VERIFICATION_DATA
+    );
+    yield call(onEmailVerificationdata, payload);
   }
 }

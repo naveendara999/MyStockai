@@ -128,14 +128,13 @@ import {
 
 const RechartData = (props) => {
   const data = props.data;
-  console.log("length", data.length);
-  console.log("15_length", data.length - 15);
+  // console.log("length", data.length);
+  // console.log("15_length", data.length - 15);
 
   const [Index, setIndex] = React.useState({
     startIndex: data.length - 15,
     endIndex: data.length,
   });
-  console.log("iNDEX", Index);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <ComposedChart

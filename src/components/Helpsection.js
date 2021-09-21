@@ -14,7 +14,7 @@ function Helpsection() {
   return (
     <div className="my-5">
       <Container>
-        <Row>
+        {/* <Row>
           <Col
             md={6}
             style={{
@@ -149,7 +149,7 @@ function Helpsection() {
               </li>
             </div>
           </Col>
-        </Row>
+        </Row> */}
         {/* // */}
         <Row className="my-5">
           <Col
