@@ -34,7 +34,6 @@ function* getStockFuture(payload) {
         symbol: payload,
       }
     );
-    console.log("data===>> future Data", payload, data);
     yield put(actionCreators.getStockFutureSuccessAction(data));
   } catch (error) {
     yield put(
