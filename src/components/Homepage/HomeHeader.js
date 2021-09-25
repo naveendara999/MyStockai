@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -37,18 +37,23 @@ export const HomeHeaders = () => {
 
   const logout = () => {
     localStorage.removeItem("UserAuthenticated");
+    localStorage.removeItem("UserEmail");
+    localStorage.removeItem("UserPassword");
     history.push("/login");
   };
 
   const UserAuthenticated = localStorage.getItem("UserAuthenticated");
   const dispatch = useDispatch();
-  if (!UserAuthenticated) {
-    return <Redirect to="/login" />;
-  }
 
   const searchHandler = (text) => {
     dispatch(AppActions.searchAction(text));
   };
+
+  if (!UserAuthenticated) {
+    return <Redirect to="/login" />;
+  } else {
+    dispatch(AppActions.searchAction(""));
+  }
 
   return (
     <div className="header">
@@ -93,12 +98,16 @@ export const HomeHeaders = () => {
                 maxWidth: "320px",
                 width: "100%",
                 gap: "1rem",
+                textAlign: "end",
+                justifyContent: "flex-end",
               }}
             >
-              <Input
-                placeholder="Search - Stock Symbol Name"
-                onChange={(e) => searchHandler(e.target.value)}
-              />
+              {window.location.pathname === "/toplist" && (
+                <Input
+                  placeholder="Search - Stock Symbol Name"
+                  onChange={(e) => searchHandler(e.target.value)}
+                />
+              )}
               <FontAwesomeIcon icon={faUserCircle} size="3x" color="gray" />
             </div>
           </Nav>
@@ -120,7 +129,7 @@ export const HomeHeaders = () => {
             </div>
           </div>
           <div className="p-0 right">
-            <div>
+            {/* <div>
               <Button variant="outline-primary" onClick={toggle}>
                 Leave us a comment
               </Button>
@@ -148,7 +157,7 @@ export const HomeHeaders = () => {
                   </Button>
                 </ModalFooter>
               </Modal>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

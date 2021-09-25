@@ -11,7 +11,6 @@ function* getFavStockListdata(payload) {
         emailid: `${payload}`,
       }
     );
-    console.log("data", data);
     yield put(actionCreators.getFavStockListSuccessAction(data));
   } catch (error) {
     yield put(
@@ -30,7 +29,6 @@ function* addStockInFav(payload) {
         symbol: `${payload.stock}`,
       }
     );
-    console.log("data", data);
     yield put(actionCreators.addFavStockListSuccessAction(data));
   } catch (error) {
     yield put(
@@ -49,7 +47,6 @@ function* removeStockInFav(payload) {
         symbol: `${payload.stock}`,
       }
     );
-    console.log("data", data);
     yield put(actionCreators.removeFavStockListSuccessAction(data));
   } catch (error) {
     yield put(

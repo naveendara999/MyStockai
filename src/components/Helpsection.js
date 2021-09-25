@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import hero from "./../Assets/images/listeposter.png";
 import ai from "./../Assets/images/aiimage.jpeg";
 import how from "./../Assets/images/howitworks.png";
+import xlf from "./../Assets/images/xlf.jpeg";
 import Play from "./../Assets/images/playicon.png";
 
 import ReactPlayer from "react-player";
@@ -14,7 +15,7 @@ function Helpsection() {
   return (
     <div className="my-5">
       <Container>
-        {/* <Row>
+        <Row>
           <Col
             md={6}
             style={{
@@ -26,47 +27,10 @@ function Helpsection() {
             className=" mt-5 mt-md-0 order-md-0 px-md-3 px-0"
           >
             <div style={{ textAlign: "right", height: "100%" }}>
-              {play && (
-                <div
-                  style={{
-                    position: "relative",
-                    maxWidth: "1920px",
-                    maxHeight: "1080px",
-                    width: "100%",
-                    height: "100%",
-                    zIndex: "10000",
-                    // backgroundColor: 'rgb(0,0,0,.7)',
-                    // paddingTop: '56.25%',
-                  }}
-                  onClick={() => setplay(!play)}
-                >
-                  <ReactPlayer
-                    style={{
-                      position: "fixed",
-                      top: "50%",
-                      left: "50%",
-                      transform: "translate(-50%,-50%)",
-                      maxWidth: "1280px",
-                      maxHeight: "720px",
-                    }}
-                    width="100%"
-                    height="100%"
-                    url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-                    playing={play}
-                  />
-                </div>
-              )}
-
               <img
                 alt=""
-                src={hero}
+                src={xlf}
                 style={{ objectFit: "cover", height: "100%", width: "100%" }}
-              />
-              <img
-                onClick={() => setplay(!play)}
-                className="playicon  img-fluid "
-                alt=""
-                src={Play}
               />
             </div>
           </Col>
@@ -94,8 +58,8 @@ function Helpsection() {
                   className="i"
                   data-aos="fade-down"
                 />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
+                To show you trend of any specific stock
+                {/* <span>Top stocks in uptrend each day that you can buy</span> */}
               </li>
               <li className="li" data-aos="fade-right">
                 <FontAwesomeIcon
@@ -104,8 +68,8 @@ function Helpsection() {
                   className="i"
                   data-aos="fade-down"
                 />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
+                Next 5 Days forecasted amount for each stock
+                {/* <span>Top stocks in uptrend each day that you can buy</span> */}
               </li>
               <li className="li" data-aos="fade-right">
                 <FontAwesomeIcon
@@ -114,43 +78,13 @@ function Helpsection() {
                   className="i"
                   data-aos="fade-down"
                 />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
-              </li>
-              <li className="li" data-aos="fade-right">
-                <FontAwesomeIcon
-                  icon={faCheckSquare}
-                  size="1x"
-                  className="i"
-                  data-aos="fade-down"
-                />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
-              </li>
-              <li className="li" data-aos="fade-right">
-                <FontAwesomeIcon
-                  icon={faCheckSquare}
-                  size="1x"
-                  className="i"
-                  data-aos="fade-down"
-                />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
-              </li>
-              <li className="li" data-aos="fade-right">
-                <FontAwesomeIcon
-                  icon={faCheckSquare}
-                  size="1x"
-                  className="i"
-                  data-aos="fade-down"
-                />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
+                KPI which will show you whether you should buy or sell stock
+                according to forecasted amount
+                {/* <span>Top stocks in uptrend each day that you can buy</span> */}
               </li>
             </div>
           </Col>
-        </Row> */}
-        {/* // */}
+        </Row>
         <Row className="my-5">
           <Col
             md={6}
@@ -165,7 +99,7 @@ function Helpsection() {
                 className="t mb-3"
                 style={{ fontWeight: "700", color: " #181f2a" }}
               >
-                Everyone has their own style of INVESTING.
+                Who We are?
               </h2>
             </div>
 
@@ -177,10 +111,22 @@ function Helpsection() {
                   className="i"
                   data-aos="fade-down"
                 />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
+                We are AI enthusiast who have worked on many projects and on
+                problems to solve it by Deep Learning and Artificial language.
+                {/* <span>Top stocks in uptrend each day that you can buy</span> */}
               </li>
               <li className="li" data-aos="fade-right">
+                <FontAwesomeIcon
+                  icon={faCheckSquare}
+                  size="1x"
+                  className="i"
+                  data-aos="fade-down"
+                />
+                We have worked on every cloud platform and committed to best
+                solution to our clients.
+                {/* <span>Top stocks in uptrend each day that you can buy</span> */}
+              </li>
+              {/* <li className="li" data-aos="fade-right">
                 <FontAwesomeIcon
                   icon={faCheckSquare}
                   size="1x"
@@ -199,37 +145,7 @@ function Helpsection() {
                 />
                 View daily uptrend stocks
                 <span>Top stocks in uptrend each day that you can buy</span>
-              </li>
-              <li className="li" data-aos="fade-right">
-                <FontAwesomeIcon
-                  icon={faCheckSquare}
-                  size="1x"
-                  className="i"
-                  data-aos="fade-down"
-                />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
-              </li>
-              <li className="li" data-aos="fade-right">
-                <FontAwesomeIcon
-                  icon={faCheckSquare}
-                  size="1x"
-                  className="i"
-                  data-aos="fade-down"
-                />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
-              </li>
-              <li className="li" data-aos="fade-right">
-                <FontAwesomeIcon
-                  icon={faCheckSquare}
-                  size="1x"
-                  className="i"
-                  data-aos="fade-down"
-                />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
-              </li>
+              </li> */}
             </div>
           </Col>
           <Col
@@ -285,7 +201,7 @@ function Helpsection() {
                 className="wow fadeInLeft mb-3"
                 style={{ fontWeight: "700", color: " #181f2a" }}
               >
-                How does MyStock.ai works ?
+                How does My Stock AI work?
               </h2>
             </div>
 
@@ -297,10 +213,22 @@ function Helpsection() {
                   className="i"
                   data-aos="fade-down"
                 />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
+                My stock AI is artificial model which trained on past data and
+                according to trend, it shows forecasted amount for each stock
+                for upcoming 5 Days.
+                {/* <span>Top stocks in uptrend each day that you can buy</span> */}
               </li>
               <li className="li" data-aos="fade-right">
+                <FontAwesomeIcon
+                  icon={faCheckSquare}
+                  size="1x"
+                  className="i"
+                  data-aos="fade-down"
+                />
+                We have data of share price for last 10 years.
+                {/* <span>Top stocks in uptrend each day that you can buy</span> */}
+              </li>
+              {/* <li className="li" data-aos="fade-right">
                 <FontAwesomeIcon
                   icon={faCheckSquare}
                   size="1x"
@@ -339,17 +267,7 @@ function Helpsection() {
                 />
                 View daily uptrend stocks
                 <span>Top stocks in uptrend each day that you can buy</span>
-              </li>
-              <li className="li" data-aos="fade-right">
-                <FontAwesomeIcon
-                  icon={faCheckSquare}
-                  size="1x"
-                  className="i"
-                  data-aos="fade-down"
-                />
-                View daily uptrend stocks
-                <span>Top stocks in uptrend each day that you can buy</span>
-              </li>
+              </li> */}
             </div>
           </Col>
         </Row>

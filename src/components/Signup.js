@@ -102,7 +102,7 @@ const Signup = () => {
 
   if (value.isSuccess && value.Message === "Registerd" && loading) {
     setLoading(false);
-    console.log("Register but not redirect");
+    // console.log("Register but not redirect");
     history.push("/login");
   } else if (value.isSuccess && loading) {
     setLoading(false);
@@ -139,7 +139,9 @@ const Signup = () => {
       <Row className="login_container my-2">
         <div className="auth-card shadow p-4">
           <div className="logo_image mb-3">
-            <img src={logo} alt="" width="200" />
+            <Link to="/">
+              <img src={logo} alt="" width="200" />
+            </Link>
           </div>
           <div>
             <h3 className="mb-2">Sign up</h3>

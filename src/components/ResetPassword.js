@@ -125,7 +125,9 @@ const ResetPassword = () => {
       <Row className="login_container">
         <div className="auth-card shadow p-4">
           <div className="logo_image mb-3">
-            <img src={logo} alt="" width="200" />
+            <Link to="/">
+              <img src={logo} alt="" width="200" />
+            </Link>
           </div>
           <div>
             <h3 className="mb-2">Forget Password?</h3>

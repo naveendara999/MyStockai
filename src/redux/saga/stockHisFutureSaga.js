@@ -11,7 +11,6 @@ function* getStockHistorical(payload) {
         symbol: payload,
       }
     );
-    console.log("data", data);
     yield put(actionCreators.getStockHistoricalSuccessAction(data));
   } catch (error) {
     yield put(
@@ -29,7 +28,6 @@ function* getStockFuture(payload) {
         symbol: payload,
       }
     );
-    console.log("data", data);
     yield put(actionCreators.getStockFutureSuccessAction(data));
   } catch (error) {
     yield put(

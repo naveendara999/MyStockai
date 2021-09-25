@@ -12,7 +12,7 @@ function* onLogindata(payload) {
         password_: payload.password,
       }
     );
-    console.log("data", data);
+
     yield put(actionCreators.loginSuccessAction(data));
   } catch (error) {
     yield put(actionCreators.loginErrorAction(error));
@@ -36,7 +36,7 @@ function* onSignUpdata(payload) {
         sub_end: Date(),
       }
     );
-    console.log("data", data);
+
     yield put(actionCreators.signupSuccessAction(data));
   } catch (error) {
     yield put(actionCreators.signupErrorAction(error));
@@ -54,7 +54,7 @@ function* onPasswordResetdata(payload) {
         new_password: payload.data.confirmPass,
       }
     );
-    console.log("data", data);
+
     yield put(actionCreators.passwordResetSuccessAction(data));
   } catch (error) {
     yield put(actionCreators.passwordResetErrorAction(error));
@@ -70,7 +70,7 @@ function* onEmailVerificationdata(payload) {
         tomailid: payload.email,
       }
     );
-    console.log("data", data);
+
     yield put(actionCreators.emailVerificationSuccessAction(data));
   } catch (error) {
     yield put(actionCreators.emailVerificationErrorAction(error));

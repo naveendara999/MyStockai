@@ -15,7 +15,9 @@ import * as StockActions from "../../../redux/actions/stockListActions";
 import * as FavStockActions from "../../../redux/actions/favStockActions";
 import * as StockHisFutActions from "../../../redux/actions/stockHisFutureActions";
 import * as AppActions from "../../../redux/actions/appActions";
+import * as AuthActions from "../../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
+import PaymentDetail from "../../modal/PaymentDetail";
 function TopPicks() {
   const tableHeader = [
     "Stock name",
@@ -39,12 +41,16 @@ function TopPicks() {
   const dispatch = useDispatch();
   const history = useHistory();
   const UserEmail = localStorage.getItem("UserEmail");
+  const UserPassword = localStorage.getItem("UserPassword");
   const state = useSelector((state) => state);
   const favList = useSelector((state) => state.favStockData.getFavData);
   const putdata = useSelector((state) => state.favStockData.putFavData);
   const stockList = useSelector((state) => state.stockListData);
 
   React.useEffect(() => {
+    if (!state.authData.loginData.isSuccess) {
+      dispatch(AuthActions.loginAction(UserEmail, UserPassword));
+    }
     dispatch(StockActions.stockListAction());
     dispatch(AppActions.clearReducerAction());
   }, []);
@@ -83,40 +89,71 @@ function TopPicks() {
               </tr>
             </thead>
             <tbody>
-              {stockList.data &&
-                stockList.data
-                  .slice(0, 5)
-                  .filter((item) =>
-                    item.symbol.includes(state.appData.search.toUpperCase())
-                  )
-                  .map((list, index) => (
-                    <tr>
-                      <td onClick={() => getStockDetials(list.symbol)}>
-                        <Link>{list.symbol}</Link>
-                      </td>
-                      <td>{list.date}</td>
-                      <td>{list.close}</td>
-                      <td>{list.high}</td>
-                      <td>{list.low}</td>
-                      <td>{list.open}</td>
-                      <td>{list.volume}</td>
-                      <td>{list.adjClose}</td>
-                      <td>{list.adjHigh}</td>
-                      <td>{list.adjLow}</td>
-                      <td>{list.adjOpen}</td>
-                      <td>{list.adjVolume}</td>
-                      <td>{list.divCash}</td>
-                      <td>{list.splitFactor}</td>
-                    </tr>
-                  ))}
+              {state.authData.loginData.subscribed
+                ? stockList.data &&
+                  state.authData.loginData.isSuccess &&
+                  stockList.data
+                    .filter((item) =>
+                      item.symbol.includes(state.appData.search.toUpperCase())
+                    )
+                    .map((list, index) => (
+                      <tr>
+                        <td onClick={() => getStockDetials(list.symbol)}>
+                          <Link>{list.symbol}</Link>
+                        </td>
+                        <td>{list.date}</td>
+                        <td>{list.close}</td>
+                        <td>{list.high}</td>
+                        <td>{list.low}</td>
+                        <td>{list.open}</td>
+                        <td>{list.volume}</td>
+                        <td>{list.adjClose}</td>
+                        <td>{list.adjHigh}</td>
+                        <td>{list.adjLow}</td>
+                        <td>{list.adjOpen}</td>
+                        <td>{list.adjVolume}</td>
+                        <td>{list.divCash}</td>
+                        <td>{list.splitFactor}</td>
+                      </tr>
+                    ))
+                : stockList.data &&
+                  state.authData.loginData.isSuccess &&
+                  stockList.data
+                    .slice(0, 5)
+                    .filter((item) =>
+                      item.symbol.includes(state.appData.search.toUpperCase())
+                    )
+                    .map((list, index) => (
+                      <tr>
+                        <td onClick={() => getStockDetials(list.symbol)}>
+                          <Link>{list.symbol}</Link>
+                        </td>
+                        <td>{list.date}</td>
+                        <td>{list.close}</td>
+                        <td>{list.high}</td>
+                        <td>{list.low}</td>
+                        <td>{list.open}</td>
+                        <td>{list.volume}</td>
+                        <td>{list.adjClose}</td>
+                        <td>{list.adjHigh}</td>
+                        <td>{list.adjLow}</td>
+                        <td>{list.adjOpen}</td>
+                        <td>{list.adjVolume}</td>
+                        <td>{list.divCash}</td>
+                        <td>{list.splitFactor}</td>
+                      </tr>
+                    ))}
             </tbody>
           </Table>
-          {!stockList.isLoading && (
-            <div class="d-flex justify-content-end">
-              <Button>See More</Button>
-            </div>
-          )}
-          {stockList.isLoading && (
+
+          <div class="d-flex justify-content-end payment">
+            {!state.authData.loginData.subscribed &&
+              state.authData.loginData.isSuccess && (
+                <PaymentDetail buttonLabel="See More" />
+              )}
+          </div>
+
+          {(stockList.isLoading || state.authData.loginData.isLoading) && (
             <div class="d-flex justify-content-center py-5">
               <div class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>

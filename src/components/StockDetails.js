@@ -30,6 +30,8 @@ export const StockDetails = () => {
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const [visible, setVisible] = useState(true);
 
+  const [perValue, setPerValue] = useState(0);
+
   const [user, setuser] = React.useState("");
   const [color, setcolor] = React.useState("");
 
@@ -47,6 +49,15 @@ export const StockDetails = () => {
   const addFavHandler = () => {
     dispatch(favStockActions.addFavStockListAction(UserEmail, stock));
   };
+
+  // let totalPrice = hisData.data
+  //   .reverse()
+  //   .slice(0, 5)
+  //   .reduce(function (accumulator, item) {
+  //     return accumulator + item.predicted_price;
+  //   }, 0);
+
+  // console.log("totalPrice", totalPrice);
 
   var getInitials = function (string) {
     var names = string.split(" "),
