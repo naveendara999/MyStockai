@@ -75,10 +75,14 @@ const SplitForm = (amount) => {
           // window.location.reload();
         }
       } catch (error) {
+        alert(error.message);
         console.log("Error", error);
       }
     } else {
-      console.log(error.message);
+      if (error && error.message) {
+        alert(error.message);
+        console.log(error.message);
+      }
     }
 
     if (!stripe || !elements) {
@@ -94,6 +98,7 @@ const SplitForm = (amount) => {
         message === "Payment Sucessful" ? (
           <Alert color="success">{message}</Alert>
         ) : (
+
           <Alert color="error">{message}</Alert>
         )
       ) : (

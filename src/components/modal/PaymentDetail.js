@@ -49,7 +49,8 @@ const PaymentDetail = (props) => {
         className={className}
         style={{ maxWidth: "1000px" }}
       >
-        <ModalHeader toggle={toggle}>Please Select Premium Plan </ModalHeader>
+
+        <ModalHeader toggle={toggle} charCode="close" unmountOnClose={false}>Please Select Premium Plan </ModalHeader>
         <ModalBody>
           <div style={{ display: "flex" }}>
             <Card

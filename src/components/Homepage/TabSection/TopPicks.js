@@ -18,6 +18,7 @@ import * as AppActions from "../../../redux/actions/appActions";
 import * as AuthActions from "../../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import PaymentDetail from "../../modal/PaymentDetail";
+
 function TopPicks() {
   const tableHeader = [
     "Stock name",
@@ -67,7 +68,12 @@ function TopPicks() {
     setLoading(stock);
     dispatch(FavStockActions.removeFavStockListAction(UserEmail, stock));
   };
-  const five_stock = ["GOOG","FB","MSFT","AMZN","AAPL"]
+  const five_stock = ["GOOG", "FB", "MSFT", "AMZN", "AAPL"]
+
+  const Filter_Data = function (item) {
+    return five_stock.includes(item.symbol)
+  }
+
   return (
     <Container style={{ marginTop: "160px" }} className="toppicks">
       <Tabs defaultActiveKey="Top picks in uptrend" id="StocklistTab">
@@ -91,58 +97,58 @@ function TopPicks() {
             <tbody>
               {state.authData.loginData.subscribed
                 ? stockList.data &&
-                  state.authData.loginData.isSuccess &&
-                  stockList.data
-                    .filter((item) =>
-                      item.symbol.includes(state.appData.search.toUpperCase())
-                    )
-                    .map((list, index) => (
-                      <tr>
-                        <td onClick={() => getStockDetials(list.symbol)}>
-                          <Link>{list.symbol}</Link>
-                        </td>
-                        <td>{list.date}</td>
-                        <td>{list.close}</td>
-                        <td>{list.high}</td>
-                        <td>{list.low}</td>
-                        <td>{list.open}</td>
-                        <td>{list.volume}</td>
-                        <td>{list.adjClose}</td>
-                        <td>{list.adjHigh}</td>
-                        <td>{list.adjLow}</td>
-                        <td>{list.adjOpen}</td>
-                        <td>{list.adjVolume}</td>
-                        <td>{list.divCash}</td>
-                        <td>{list.splitFactor}</td>
-                      </tr>
-                    ))
+                state.authData.loginData.isSuccess &&
+                stockList.data
+                  .filter((item) =>
+                    item.symbol.includes(state.appData.search.toUpperCase())
+                  )
+                  .map((list, index) => (
+                    <tr>
+                      <td onClick={() => getStockDetials(list.symbol)}>
+                        <Link>{list.symbol}</Link>
+                      </td>
+                      <td>{list.date}</td>
+                      <td>{list.close}</td>
+                      <td>{list.high}</td>
+                      <td>{list.low}</td>
+                      <td>{list.open}</td>
+                      <td>{list.volume}</td>
+                      <td>{list.adjClose}</td>
+                      <td>{list.adjHigh}</td>
+                      <td>{list.adjLow}</td>
+                      <td>{list.adjOpen}</td>
+                      <td>{list.adjVolume}</td>
+                      <td>{list.divCash}</td>
+                      <td>{list.splitFactor}</td>
+                    </tr>
+                  ))
                 : stockList.data &&
-                  state.authData.loginData.isSuccess &&
-                  stockList.data
-                    .slice(0, 5)
-                    .filter((item) =>
-                      item.symbol.includes(state.appData.search.toUpperCase())
-                    )
-                    .map((list, index) => (
-                      <tr>
-                        <td onClick={() => getStockDetials(list.symbol)}>
-                          <Link>{list.symbol}</Link>
-                        </td>
-                        <td>{list.date}</td>
-                        <td>{list.close}</td>
-                        <td>{list.high}</td>
-                        <td>{list.low}</td>
-                        <td>{list.open}</td>
-                        <td>{list.volume}</td>
-                        <td>{list.adjClose}</td>
-                        <td>{list.adjHigh}</td>
-                        <td>{list.adjLow}</td>
-                        <td>{list.adjOpen}</td>
-                        <td>{list.adjVolume}</td>
-                        <td>{list.divCash}</td>
-                        <td>{list.splitFactor}</td>
-                      </tr>
-                    ))}
+                state.authData.loginData.isSuccess &&
+                stockList.data
+                  .filter(Filter_Data)
+                  .filter((item) =>
+                    item.symbol.includes(state.appData.search.toUpperCase())
+                  )
+                  .map((list, index) => (
+                    <tr>
+                      <td onClick={() => getStockDetials(list.symbol)}>
+                        <Link>{list.symbol}</Link>
+                      </td>
+                      <td>{list.date}</td>
+                      <td>{list.close}</td>
+                      <td>{list.high}</td>
+                      <td>{list.low}</td>
+                      <td>{list.open}</td>
+                      <td>{list.volume}</td>
+                      <td>{list.adjClose}</td>
+                      <td>{list.adjHigh}</td>
+                      <td>{list.adjLow}</td>
+                      <td>{list.adjOpen}</td>
+                      <td>{list.adjVolume}</td>
+                      <td>{list.divCash}</td>
+                      <td>{list.splitFactor}</td>
+                    </tr>
+                  ))}
             </tbody>
           </Table>
 
@@ -168,7 +174,7 @@ function TopPicks() {
           <Col lg={12} className="favorites">
             <ul class="list-group">
               {putdata.isSuccess &&
-              putdata.Message === "Stock removed from favourites" ? (
+                putdata.Message === "Stock removed from favourites" ? (
                 <UncontrolledAlert color="success">
                   {putdata.Message}
                 </UncontrolledAlert>
