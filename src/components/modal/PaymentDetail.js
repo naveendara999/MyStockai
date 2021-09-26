@@ -20,7 +20,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
-  "pk_test_51JVgfvAEYR3520CFl30fAP4wda21LUtAJOb3v18VXEeO6dZ79F1qWD5Fpk4u7JW2npI5mkHt2PlipEqk81yM6lzh00n0BKgceW"
+  "pk_live_51JVgfvAEYR3520CFVF9rW8dhdsevU0IxUGwY4LDJju0AGnnYSG0iSdULdMKmxboU17I2sbzfaTu4DzHDInvVBMLZ002CWQ8PTw"
 );
 
 const PaymentDetail = (props) => {

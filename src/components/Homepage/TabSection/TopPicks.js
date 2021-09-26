@@ -67,7 +67,7 @@ function TopPicks() {
     setLoading(stock);
     dispatch(FavStockActions.removeFavStockListAction(UserEmail, stock));
   };
-
+  const five_stock = ["GOOG","FB","MSFT","AMZN","AAPL"]
   return (
     <Container style={{ marginTop: "160px" }} className="toppicks">
       <Tabs defaultActiveKey="Top picks in uptrend" id="StocklistTab">

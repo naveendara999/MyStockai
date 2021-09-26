@@ -72,6 +72,7 @@ const SplitForm = (amount) => {
           // console.log("Successful payment");
           setMessage(response.data.Message);
           setSuccess(true);
+          // window.location.reload();
         }
       } catch (error) {
         console.log("Error", error);
