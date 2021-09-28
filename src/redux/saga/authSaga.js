@@ -27,7 +27,7 @@ function* onSignUpdata(payload) {
       {
         LastName: payload.account.lastname,
         FirstName: payload.account.firstname,
-        Age: payload.account.age,
+        // Age: payload.account.age,
         emailid: payload.account.email,
         password_: payload.account.password,
         phoneno: payload.account.phonenumber,

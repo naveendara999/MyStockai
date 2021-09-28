@@ -114,8 +114,8 @@ const Signup = () => {
     if (
       account.email.length > 0 &&
       account.password.length >= 8 &&
-      account.firstname.length > 0 &&
-      account.age.length === 2
+      account.firstname.length > 0 
+      // && account.age.length === 2
     ) {
       setLoading(true);
       dispatch(AuthActions.signupAction(account));
@@ -175,7 +175,7 @@ const Signup = () => {
               />
             </div>
 
-            <div className="form-group mt-3 ">
+            {/* <div className="form-group mt-3 ">
               <Input
                 className="form-control"
                 type="number"
@@ -186,7 +186,7 @@ const Signup = () => {
                 validations={[required, age]}
                 onChange={handleChange}
               />
-            </div>
+            </div> */}
 
             <div className="form-group mt-3 ">
               <Input
